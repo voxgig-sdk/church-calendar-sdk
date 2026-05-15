@@ -1,0 +1,160 @@
+# Entity: calendar
+
+main: kit: entity: calendar: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "colour"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "description"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "rank"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "rank_num"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "system"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "title"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "calendar"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "default"
+                kind: "param"
+                name: "calendar"
+                orig: "calendar"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                example: 25
+                kind: "param"
+                name: "day"
+                orig: "day"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+              {
+                example: 12
+                kind: "param"
+                name: "month"
+                orig: "month"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+              {
+                example: 2024
+                kind: "param"
+                name: "year"
+                orig: "year"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v0/en/calendars/{calendar}/{year}/{month}/{day}"
+          parts: [
+            "api"
+            "v0"
+            "en"
+            "calendars"
+            "{calendar}"
+            "{year}"
+            "{month}"
+            "{day}"
+          ]
+          select: {
+            exist: [
+              "calendar"
+              "day"
+              "month"
+              "year"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          args: {
+            params: [
+              {
+                example: "en"
+                kind: "param"
+                name: "locale"
+                orig: "locale"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v0/{locale}/calendars"
+          parts: [
+            "api"
+            "v0"
+            "{locale}"
+            "calendars"
+          ]
+          select: {
+            exist: [
+              "locale"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "calendar"
+      ]
+      [
+        "v0"
+      ]
+    ]
+  }
+
+
+
+}

@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "http://calapi.inadiutorium.cz/api-doc"
+      }
+      description: "The Church Calendar API provides access to calendar data for any day, allowing users to retrieve various liturgical celebrations and details. It supports multiple languages and enables specific queries for feast names and calendar descriptions based on the selected calendar system."
+      servers: [
+        {
+          description: "Production server"
+          url: "http://calapi.inadiutorium.cz"
+        }
+      ]
+      title: "Church Calendar API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

@@ -1,0 +1,61 @@
+{
+  "existing": {
+    "calendar": {
+      "CALENDAR00": {
+        "colour": "s46",
+        "description": "s47",
+        "name": "s48",
+        "rank": "s49",
+        "rank_num": 74,
+        "system": "s4b",
+        "title": "s4c",
+        "calendar": "CALENDAR01",
+        "day": "DAY01",
+        "month": "MONTH01",
+        "year": "YEAR01",
+        "locale": "LOCALE01"
+      },
+      "CALENDAR01": {
+        "colour": "s8c",
+        "description": "s8d",
+        "name": "s8e",
+        "rank": "s8f",
+        "rank_num": 144,
+        "system": "s91",
+        "title": "s92",
+        "calendar": "CALENDAR01",
+        "day": "DAY01",
+        "month": "MONTH01",
+        "year": "YEAR01",
+        "locale": "LOCALE01"
+      },
+      "CALENDAR02": {
+        "colour": "sd2",
+        "description": "sd3",
+        "name": "sd4",
+        "rank": "sd5",
+        "rank_num": 214,
+        "system": "sd7",
+        "title": "sd8",
+        "calendar": "CALENDAR01",
+        "day": "DAY01",
+        "month": "MONTH01",
+        "year": "YEAR01",
+        "locale": "LOCALE01"
+      }
+    }
+  },
+  "new": {
+    "calendar": {
+      "calendar_ref01": {
+        "colour": "s118",
+        "description": "s119",
+        "name": "s11a",
+        "rank": "s11b",
+        "rank_num": 284,
+        "system": "s11d",
+        "title": "s11e"
+      }
+    }
+  }
+}

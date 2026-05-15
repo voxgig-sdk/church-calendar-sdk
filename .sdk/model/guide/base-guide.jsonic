@@ -1,0 +1,17 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 1
+  metrics: count: path: 2
+  metrics: count: method: 2
+
+  entity: calendar: {
+    path: "/api/v0/en/calendars/{calendar}/{year}/{month}/{day}": {
+      op: list: method: *GET
+    }
+    path: "/api/v0/{locale}/calendars": {
+      op: list: method: *GET
+    }
+  }
+
+}

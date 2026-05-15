@@ -1,0 +1,239 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Church Calendar API",
+    "description": "The Church Calendar API provides access to calendar data for any day, allowing users to retrieve various liturgical celebrations and details. It supports multiple languages and enables specific queries for feast names and calendar descriptions based on the selected calendar system.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "http://calapi.inadiutorium.cz/api-doc"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://calapi.inadiutorium.cz",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/api/v0/en/calendars/{calendar}/{year}/{month}/{day}": {
+      "get": {
+        "summary": "Get liturgical calendar data for a specific date",
+        "description": "Retrieves liturgical celebrations and calendar details for a specific date in the selected calendar system",
+        "operationId": "getCalendarDay",
+        "parameters": [
+          {
+            "name": "calendar",
+            "in": "path",
+            "required": true,
+            "description": "Calendar system identifier (e.g., default, general-en, general-la)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "default"
+          },
+          {
+            "name": "year",
+            "in": "path",
+            "required": true,
+            "description": "Year (4-digit format)",
+            "schema": {
+              "type": "integer",
+              "minimum": 1900,
+              "maximum": 2100
+            },
+            "example": 2024
+          },
+          {
+            "name": "month",
+            "in": "path",
+            "required": true,
+            "description": "Month (1-12)",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 12
+            },
+            "example": 12
+          },
+          {
+            "name": "day",
+            "in": "path",
+            "required": true,
+            "description": "Day of the month (1-31)",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 31
+            },
+            "example": 25
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with calendar data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "The requested date"
+                    },
+                    "season": {
+                      "type": "string",
+                      "description": "Liturgical season"
+                    },
+                    "season_week": {
+                      "type": "integer",
+                      "description": "Week number within the liturgical season"
+                    },
+                    "celebrations": {
+                      "type": "array",
+                      "description": "List of liturgical celebrations for this date",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "description": "Title of the celebration"
+                          },
+                          "colour": {
+                            "type": "string",
+                            "description": "Liturgical color for the celebration"
+                          },
+                          "rank": {
+                            "type": "string",
+                            "description": "Liturgical rank of the celebration"
+                          },
+                          "rank_num": {
+                            "type": "number",
+                            "description": "Numerical rank value"
+                          }
+                        }
+                      }
+                    },
+                    "weekday": {
+                      "type": "string",
+                      "description": "Day of the week"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Date or calendar not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Calendar"
+        ]
+      }
+    },
+    "/api/v0/{locale}/calendars": {
+      "get": {
+        "summary": "Get available calendars",
+        "description": "Retrieves a list of available calendar systems for the specified locale",
+        "operationId": "getCalendars",
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "path",
+            "required": true,
+            "description": "Language/locale code (e.g., en, la, cs, it, fr)",
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-z]{2}$"
+            },
+            "example": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of available calendars",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "system": {
+                        "type": "string",
+                        "description": "Calendar system identifier"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Human-readable name of the calendar"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Description of the calendar system"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Locale not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Calendar"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Calendar",
+      "description": "Endpoints for retrieving liturgical calendar data"
+    }
+  ]
+}
