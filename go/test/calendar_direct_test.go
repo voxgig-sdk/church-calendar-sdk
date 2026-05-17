@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/church-calendar-sdk"
-	"github.com/voxgig-sdk/church-calendar-sdk/core"
+	sdk "github.com/voxgig-sdk/church-calendar-sdk/go"
+	"github.com/voxgig-sdk/church-calendar-sdk/go/core"
 )
 
 func TestCalendarDirect(t *testing.T) {

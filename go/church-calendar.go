@@ -1,10 +1,10 @@
 package voxgigchurchcalendarsdk
 
 import (
-	"github.com/voxgig-sdk/church-calendar-sdk/core"
-	"github.com/voxgig-sdk/church-calendar-sdk/entity"
-	"github.com/voxgig-sdk/church-calendar-sdk/feature"
-	_ "github.com/voxgig-sdk/church-calendar-sdk/utility"
+	"github.com/voxgig-sdk/church-calendar-sdk/go/core"
+	"github.com/voxgig-sdk/church-calendar-sdk/go/entity"
+	"github.com/voxgig-sdk/church-calendar-sdk/go/feature"
+	_ "github.com/voxgig-sdk/church-calendar-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

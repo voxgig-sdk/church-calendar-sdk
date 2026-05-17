@@ -3,7 +3,7 @@ package sdktest
 import (
 	"testing"
 
-	sdk "github.com/voxgig-sdk/church-calendar-sdk"
+	sdk "github.com/voxgig-sdk/church-calendar-sdk/go"
 )
 
 func TestExists(t *testing.T) {

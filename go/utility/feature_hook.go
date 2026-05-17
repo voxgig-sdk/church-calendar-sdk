@@ -3,7 +3,7 @@ package utility
 import (
 	"reflect"
 
-	"github.com/voxgig-sdk/church-calendar-sdk/core"
+	"github.com/voxgig-sdk/church-calendar-sdk/go/core"
 )
 
 func featureHookUtil(ctx *core.Context, name string) {

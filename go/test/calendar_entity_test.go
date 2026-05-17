@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/church-calendar-sdk"
-	"github.com/voxgig-sdk/church-calendar-sdk/core"
+	sdk "github.com/voxgig-sdk/church-calendar-sdk/go"
+	"github.com/voxgig-sdk/church-calendar-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/church-calendar-sdk/go/utility/struct"
 )
 
 func TestCalendarEntity(t *testing.T) {
