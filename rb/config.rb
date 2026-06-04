@@ -15,9 +15,6 @@ module ChurchCalendarConfig
       },
       "options" => {
         "base" => "http://calapi.inadiutorium.cz",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },

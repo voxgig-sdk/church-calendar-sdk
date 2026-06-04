@@ -16,7 +16,15 @@
           }
         ],
         "title": "Church Calendar API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Liturgical calendar data for the Roman Catholic Church, served as JSON for any day or year",
+        "homepage": "http://calapi.inadiutorium.cz",
+        "docs_url": "http://calapi.inadiutorium.cz",
+        "about_md": "The [Church Calendar API](http://calapi.inadiutorium.cz) exposes the liturgical calendar of the Roman Catholic Church as a JSON web service. It is part of the In Adiutorium project, an open community effort around computing and presenting Catholic liturgical data.\n\nWhat you get from the API:\n\n- A list of available calendars (general Roman calendar plus regional variants) via `GET /api/v0/{lang}/calendars`.\n- The celebrations for today on a given calendar via `GET /api/v0/{lang}/calendars/{calendar}/today`.\n- Per-day liturgical information including season, weekday, celebrations, titles, ranks and liturgical colour.\n- Multiple language outputs (e.g. `en`, plus other localisations) selected via the path segment.\n\nThe service is HTTP-only (no authentication), responds quickly (tens of milliseconds typical) and is community-reported as highly reliable. Note that CORS is not enabled on the public endpoints, so browser-side calls may need to be proxied.",
+        "entity_desc": {
+          "calendar": "A liturgical calendar variant (e.g. the general Roman calendar or a regional one) from which daily celebrations can be fetched, served under `/api/v0/{lang}/calendars` and `/api/v0/{lang}/calendars/{calendar}/today`."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -24,7 +32,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "calendar": {

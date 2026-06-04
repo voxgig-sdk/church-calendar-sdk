@@ -142,14 +142,12 @@ func calendarDirectSetup(mockres any) *calendarDirectSetupResult {
 	env := envOverride(map[string]any{
 		"CHURCHCALENDAR_TEST_CALENDAR_ENTID": map[string]any{},
 		"CHURCHCALENDAR_TEST_LIVE":    "FALSE",
-		"CHURCHCALENDAR_APIKEY":       "NONE",
 	})
 
 	live := env["CHURCHCALENDAR_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["CHURCHCALENDAR_APIKEY"],
 		}
 		client := sdk.NewChurchCalendarSDK(mergedOpts)
 

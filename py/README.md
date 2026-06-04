@@ -23,12 +23,9 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
-import os
 from churchcalendar_sdk import ChurchCalendarSDK
 
-client = ChurchCalendarSDK({
-    "apikey": os.environ.get("CHURCH-CALENDAR_APIKEY"),
-})
+client = ChurchCalendarSDK({})
 ```
 
 ### 2. List calendars
@@ -121,7 +118,6 @@ Create a `.env.local` file at the project root:
 
 ```
 CHURCH-CALENDAR_TEST_LIVE=TRUE
-CHURCH-CALENDAR_APIKEY=<your-key>
 ```
 
 Then run:
@@ -145,7 +141,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |

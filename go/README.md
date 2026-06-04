@@ -28,16 +28,13 @@ package main
 
 import (
     "fmt"
-    "os"
 
     sdk "github.com/voxgig-sdk/church-calendar-sdk/go"
     "github.com/voxgig-sdk/church-calendar-sdk/go/core"
 )
 
 func main() {
-    client := sdk.NewChurchCalendarSDK(map[string]any{
-        "apikey": os.Getenv("CHURCH-CALENDAR_APIKEY"),
-    })
+    client := sdk.NewChurchCalendarSDK(map[string]any{})
 ```
 
 ### 2. List calendars
@@ -140,7 +137,6 @@ Create a `.env.local` file at the project root:
 
 ```
 CHURCH-CALENDAR_TEST_LIVE=TRUE
-CHURCH-CALENDAR_APIKEY=<your-key>
 ```
 
 Then run:
@@ -162,7 +158,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `"apikey"` | `string` | API key for authentication. |
 | `"base"` | `string` | Base URL of the API server. |
 | `"prefix"` | `string` | URL path prefix prepended to all requests. |
 | `"suffix"` | `string` | URL path suffix appended to all requests. |

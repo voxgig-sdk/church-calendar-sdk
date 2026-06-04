@@ -14,9 +14,6 @@ local function make_config()
     },
     options = {
       base = "http://calapi.inadiutorium.cz",
-      auth = {
-        prefix = "Bearer",
-      },
       headers = {
         ["content-type"] = "application/json",
       },

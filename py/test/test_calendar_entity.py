@@ -94,7 +94,6 @@ def _calendar_basic_setup(extra):
         "CHURCHCALENDAR_TEST_CALENDAR_ENTID": idmap,
         "CHURCHCALENDAR_TEST_LIVE": "FALSE",
         "CHURCHCALENDAR_TEST_EXPLAIN": "FALSE",
-        "CHURCHCALENDAR_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -105,7 +104,6 @@ def _calendar_basic_setup(extra):
     if env.get("CHURCHCALENDAR_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("CHURCHCALENDAR_APIKEY"),
             },
             extra or {},
         ])
