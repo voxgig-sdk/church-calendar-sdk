@@ -10,7 +10,7 @@ The Python SDK for the ChurchCalendar API — an entity-oriented client followin
 
 ## Install
 ```bash
-pip install church-calendar-sdk
+pip install voxgig-sdk-church-calendar
 ```
 
 Or install from source:

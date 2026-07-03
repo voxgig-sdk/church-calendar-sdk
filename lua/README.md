@@ -10,7 +10,7 @@ The Lua SDK for the ChurchCalendar API — an entity-oriented client using Lua c
 
 ## Install
 ```bash
-luarocks install church-calendar-sdk
+luarocks install voxgig-sdk-church-calendar
 ```
 
 If the module is not yet published, add the source directory to

@@ -10,13 +10,13 @@ The Ruby SDK for the ChurchCalendar API — an entity-oriented client using idio
 
 ## Install
 ```bash
-gem install church-calendar-sdk
+gem install voxgig-sdk-church-calendar
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "church-calendar-sdk"
+gem "voxgig-sdk-church-calendar"
 ```
 
 Then run:

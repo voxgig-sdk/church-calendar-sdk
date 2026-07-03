@@ -10,7 +10,7 @@ The TypeScript SDK for the ChurchCalendar API — a type-safe, entity-oriented c
 
 ## Install
 ```bash
-npm install church-calendar
+npm install @voxgig-sdk/church-calendar
 ```
 ## Tutorial: your first API call
 

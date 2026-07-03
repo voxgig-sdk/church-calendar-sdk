@@ -10,7 +10,7 @@ The PHP SDK for the ChurchCalendar API — an entity-oriented client using PHP c
 
 ## Install
 ```bash
-composer require voxgig/church-calendar-sdk
+composer require voxgig-sdk/church-calendar
 ```
 
 
