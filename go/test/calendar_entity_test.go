@@ -121,6 +121,7 @@ func calendarBasicSetup(extra map[string]any) *entityTestSetup {
 		"CHURCHCALENDAR_TEST_CALENDAR_ENTID": idmap,
 		"CHURCHCALENDAR_TEST_LIVE":      "FALSE",
 		"CHURCHCALENDAR_TEST_EXPLAIN":   "FALSE",
+		"CHURCHCALENDAR_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["CHURCHCALENDAR_TEST_CALENDAR_ENTID"])
@@ -131,6 +132,7 @@ func calendarBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["CHURCHCALENDAR_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["CHURCHCALENDAR_APIKEY"],
 			},
 			extra,
 		})

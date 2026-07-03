@@ -1,21 +1,8 @@
 # ChurchCalendar SDK
 
-Liturgical calendar data for the Roman Catholic Church, served as JSON for any day or year
+Church Calendar API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Church Calendar API
-
-The [Church Calendar API](http://calapi.inadiutorium.cz) exposes the liturgical calendar of the Roman Catholic Church as a JSON web service. It is part of the In Adiutorium project, an open community effort around computing and presenting Catholic liturgical data.
-
-What you get from the API:
-
-- A list of available calendars (general Roman calendar plus regional variants) via `GET /api/v0/{lang}/calendars`.
-- The celebrations for today on a given calendar via `GET /api/v0/{lang}/calendars/{calendar}/today`.
-- Per-day liturgical information including season, weekday, celebrations, titles, ranks and liturgical colour.
-- Multiple language outputs (e.g. `en`, plus other localisations) selected via the path segment.
-
-The service is HTTP-only (no authentication), responds quickly (tens of milliseconds typical) and is community-reported as highly reliable. Note that CORS is not enabled on the public endpoints, so browser-side calls may need to be proxied.
 
 ## Try it
 
@@ -49,29 +36,31 @@ gem install church-calendar-sdk
 luarocks install church-calendar-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { ChurchCalendarSDK } from 'church-calendar'
 
-const client = new ChurchCalendarSDK({})
+const client = new ChurchCalendarSDK({
+  apikey: process.env.CHURCH-CALENDAR_APIKEY,
+})
 
 // List all calendars
 const calendars = await client.Calendar().list()
+console.log(calendars.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -101,7 +90,7 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Calendar** | A liturgical calendar variant (e.g. the general Roman calendar or a regional one) from which daily celebrations can be fetched, served under `/api/v0/{lang}/calendars` and `/api/v0/{lang}/calendars/{calendar}/today`. | `/api/v0/en/calendars/{calendar}/{year}/{month}/{day}` |
+| **Calendar** |  | `/api/v0/en/calendars/{calendar}/{year}/{month}/{day}` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -111,12 +100,16 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from churchcalendar_sdk import ChurchCalendarSDK
 
-client = ChurchCalendarSDK({})
+client = ChurchCalendarSDK({
+    "apikey": os.environ.get("CHURCH-CALENDAR_APIKEY"),
+})
 
 # List all calendars
-calendars, err = client.Calendar(None).list(None, None)
+calendars, err = client.Calendar().list()
+print(calendars)
 ```
 
 ### PHP
@@ -125,10 +118,13 @@ calendars, err = client.Calendar(None).list(None, None)
 <?php
 require_once 'churchcalendar_sdk.php';
 
-$client = new ChurchCalendarSDK([]);
+$client = new ChurchCalendarSDK([
+    "apikey" => getenv("CHURCH-CALENDAR_APIKEY"),
+]);
 
 // List all calendars
-[$calendars, $err] = $client->Calendar(null)->list(null, null);
+[$calendars, $err] = $client->Calendar()->list();
+print_r($calendars);
 ```
 
 ### Golang
@@ -136,10 +132,13 @@ $client = new ChurchCalendarSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/church-calendar-sdk/go"
 
-client := sdk.NewChurchCalendarSDK(map[string]any{})
+client := sdk.NewChurchCalendarSDK(map[string]any{
+    "apikey": os.Getenv("CHURCH-CALENDAR_APIKEY"),
+})
 
 // List all calendars
 calendars, err := client.Calendar(nil).List(nil, nil)
+fmt.Println(calendars)
 ```
 
 ### Ruby
@@ -147,10 +146,13 @@ calendars, err := client.Calendar(nil).List(nil, nil)
 ```ruby
 require_relative "ChurchCalendar_sdk"
 
-client = ChurchCalendarSDK.new({})
+client = ChurchCalendarSDK.new({
+  "apikey" => ENV["CHURCH-CALENDAR_APIKEY"],
+})
 
 # List all calendars
-calendars, err = client.Calendar(nil).list(nil, nil)
+calendars, err = client.Calendar().list
+puts calendars
 ```
 
 ### Lua
@@ -158,10 +160,13 @@ calendars, err = client.Calendar(nil).list(nil, nil)
 ```lua
 local sdk = require("church-calendar_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("CHURCH-CALENDAR_APIKEY"),
+})
 
 -- List all calendars
-local calendars, err = client:Calendar(nil):list(nil, nil)
+local calendars, err = client:Calendar():list()
+print(calendars)
 ```
 
 ## Unit testing in offline mode
@@ -180,25 +185,21 @@ const result = await client.Calendar().load({ id: 'test01' })
 ### Python
 
 ```python
-client = ChurchCalendarSDK.test(None, None)
-result, err = client.Calendar(None).load(
-    {"id": "test01"}, None
-)
+client = ChurchCalendarSDK.test()
+result, err = client.Calendar().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = ChurchCalendarSDK::test(null, null);
-[$result, $err] = $client->Calendar(null)->load(
-    ["id" => "test01"], null
-);
+$client = ChurchCalendarSDK::test();
+[$result, $err] = $client->Calendar()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Calendar(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -207,19 +208,15 @@ result, err := client.Calendar(nil).Load(
 ### Ruby
 
 ```ruby
-client = ChurchCalendarSDK.test(nil, nil)
-result, err = client.Calendar(nil).load(
-  { "id" => "test01" }, nil
-)
+client = ChurchCalendarSDK.test
+result, err = client.Calendar().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Calendar(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Calendar():load({ id = "test01" })
 ```
 
 ## How it works
@@ -323,10 +320,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Church Calendar API
-
-- Upstream: [http://calapi.inadiutorium.cz](http://calapi.inadiutorium.cz)
 
 ---
 

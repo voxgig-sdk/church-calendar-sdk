@@ -85,12 +85,14 @@ def _calendar_direct_setup(mockres):
     env = runner.env_override({
         "CHURCHCALENDAR_TEST_CALENDAR_ENTID": {},
         "CHURCHCALENDAR_TEST_LIVE": "FALSE",
+        "CHURCHCALENDAR_APIKEY": "NONE",
     })
 
     live = env.get("CHURCHCALENDAR_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("CHURCHCALENDAR_APIKEY"),
         }
         client = ChurchCalendarSDK(merged_opts)
         return {

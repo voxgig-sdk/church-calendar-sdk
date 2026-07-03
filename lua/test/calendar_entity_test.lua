@@ -94,6 +94,7 @@ function calendar_basic_setup(extra)
     ["CHURCHCALENDAR_TEST_CALENDAR_ENTID"] = idmap,
     ["CHURCHCALENDAR_TEST_LIVE"] = "FALSE",
     ["CHURCHCALENDAR_TEST_EXPLAIN"] = "FALSE",
+    ["CHURCHCALENDAR_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -105,6 +106,7 @@ function calendar_basic_setup(extra)
   if env["CHURCHCALENDAR_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["CHURCHCALENDAR_APIKEY"],
       },
       extra or {},
     })

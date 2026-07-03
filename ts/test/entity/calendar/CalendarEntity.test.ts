@@ -114,6 +114,7 @@ function basicSetup(extra?: any) {
     'CHURCH_CALENDAR_TEST_CALENDAR_ENTID': idmap,
     'CHURCH_CALENDAR_TEST_LIVE': 'FALSE',
     'CHURCH_CALENDAR_TEST_EXPLAIN': 'FALSE',
+    'CHURCH_CALENDAR_APIKEY': 'NONE',
   })
 
   idmap = env['CHURCH_CALENDAR_TEST_CALENDAR_ENTID']
@@ -123,6 +124,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new ChurchCalendarSDK(merge([
       {
+        apikey: env.CHURCH_CALENDAR_APIKEY,
       },
       extra
     ]))

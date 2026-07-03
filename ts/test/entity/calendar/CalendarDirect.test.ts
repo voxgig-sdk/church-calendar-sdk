@@ -95,12 +95,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'CHURCHCALENDAR_TEST_CALENDAR_ENTID': {},
     'CHURCHCALENDAR_TEST_LIVE': 'FALSE',
+    'CHURCHCALENDAR_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.CHURCHCALENDAR_TEST_LIVE
 
   if (live) {
     const client = new ChurchCalendarSDK({
+      apikey: env.CHURCHCALENDAR_APIKEY,
     })
 
     let idmap: any = env['CHURCHCALENDAR_TEST_CALENDAR_ENTID']
