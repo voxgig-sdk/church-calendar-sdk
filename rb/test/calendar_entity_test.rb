@@ -45,8 +45,7 @@ class CalendarEntityTest < Minitest::Test
       "locale" => setup[:idmap]["locale01"],
     }
 
-    calendar_ref01_list_result, err = calendar_ref01_ent.list(calendar_ref01_match, nil)
-    assert_nil err
+    calendar_ref01_list_result = calendar_ref01_ent.list(calendar_ref01_match, nil)
     assert calendar_ref01_list_result.is_a?(Array)
 
   end
@@ -85,7 +84,6 @@ def calendar_basic_setup(extra)
     "CHURCHCALENDAR_TEST_CALENDAR_ENTID" => idmap,
     "CHURCHCALENDAR_TEST_LIVE" => "FALSE",
     "CHURCHCALENDAR_TEST_EXPLAIN" => "FALSE",
-    "CHURCHCALENDAR_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -97,7 +95,6 @@ def calendar_basic_setup(extra)
   if env["CHURCHCALENDAR_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["CHURCHCALENDAR_APIKEY"],
       },
       extra || {},
     ])

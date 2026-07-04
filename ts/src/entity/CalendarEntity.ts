@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Calendar,
+  CalendarListMatch,
+} from '../ChurchCalendarTypes'
 
 // TODO: needs Entity superclass
-class CalendarEntity extends ChurchCalendarEntityBase {
+class CalendarEntity extends ChurchCalendarEntityBase<Calendar> {
 
   constructor(client: ChurchCalendarSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class CalendarEntity extends ChurchCalendarEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: CalendarListMatch, ctrl?: Control): Promise<Calendar[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class CalendarEntity extends ChurchCalendarEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Calendar[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

@@ -2,6 +2,8 @@
 
 import { CalendarEntity } from './entity/CalendarEntity'
 
+export type * from './ChurchCalendarTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -202,6 +204,14 @@ class ChurchCalendarSDK {
 
 
 
+  _calendar?: CalendarEntity
+
+  // Idiomatic facade: `client.calendar.list()` / `client.calendar.load({ id })`.
+  get calendar(): CalendarEntity {
+    return (this._calendar ??= new CalendarEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.calendar` instead. */
   Calendar(data?: any) {
     const self = this
     return new CalendarEntity(self,data)

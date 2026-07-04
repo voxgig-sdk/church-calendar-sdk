@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'http://calapi.inadiutorium.cz',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
@@ -125,7 +121,8 @@ class Config {
                     "name": "calendar",
                     "orig": "calendar",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   },
                   {
                     "active": true,
@@ -134,7 +131,8 @@ class Config {
                     "name": "day",
                     "orig": "day",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 1
                   },
                   {
                     "active": true,
@@ -143,7 +141,8 @@ class Config {
                     "name": "month",
                     "orig": "month",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 2
                   },
                   {
                     "active": true,
@@ -152,7 +151,8 @@ class Config {
                     "name": "year",
                     "orig": "year",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 3
                   }
                 ]
               },
@@ -193,7 +193,8 @@ class Config {
                     "name": "locale",
                     "orig": "locale",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },

@@ -15,9 +15,6 @@ module ChurchCalendarConfig
       },
       "options" => {
         "base" => "http://calapi.inadiutorium.cz",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -96,6 +93,7 @@ module ChurchCalendarConfig
                         "orig" => "calendar",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                       {
                         "active" => true,
@@ -105,6 +103,7 @@ module ChurchCalendarConfig
                         "orig" => "day",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
+                        "index$" => 1,
                       },
                       {
                         "active" => true,
@@ -114,6 +113,7 @@ module ChurchCalendarConfig
                         "orig" => "month",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
+                        "index$" => 2,
                       },
                       {
                         "active" => true,
@@ -123,6 +123,7 @@ module ChurchCalendarConfig
                         "orig" => "year",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
+                        "index$" => 3,
                       },
                     ],
                   },
@@ -164,6 +165,7 @@ module ChurchCalendarConfig
                         "orig" => "locale",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },

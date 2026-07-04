@@ -9,9 +9,12 @@ The TypeScript SDK for the ChurchCalendar API — a type-safe, entity-oriented c
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/church-calendar
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/church-calendar-sdk/releases](https://github.com/voxgig-sdk/church-calendar-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { ChurchCalendarSDK } from 'church-calendar'
+import { ChurchCalendarSDK } from '@voxgig-sdk/church-calendar'
 
-const client = new ChurchCalendarSDK({
-  apikey: process.env.CHURCH-CALENDAR_APIKEY,
-})
+const client = new ChurchCalendarSDK()
 ```
 
 ### 2. List calendars
 
 ```ts
-const result = await client.Calendar().list()
+const result = await client.calendar.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -81,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = ChurchCalendarSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.calendar.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -89,7 +90,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new ChurchCalendarSDK({ apikey: '...' })
+const client = new ChurchCalendarSDK()
 const testClient = client.tester()
 ```
 
@@ -98,7 +99,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.calendar
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -125,7 +126,6 @@ const logger = {
 }
 
 const client = new ChurchCalendarSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -135,8 +135,7 @@ const client = new ChurchCalendarSDK({
 Create a `.env.local` file at the project root:
 
 ```
-CHURCH-CALENDAR_TEST_LIVE=TRUE
-CHURCH-CALENDAR_APIKEY=<your-key>
+CHURCH_CALENDAR_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -154,7 +153,6 @@ cd ts && npm test
 
 ```ts
 new ChurchCalendarSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -165,7 +163,6 @@ new ChurchCalendarSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -274,7 +271,7 @@ API path: `/api/v0/en/calendars/{calendar}/{year}/{month}/{day}`
 
 ### Calendar
 
-Create an instance: `const calendar = client.Calendar()`
+Create an instance: `const calendar = client.calendar`
 
 #### Operations
 
@@ -297,7 +294,7 @@ Create an instance: `const calendar = client.Calendar()`
 #### Example: List
 
 ```ts
-const calendars = await client.Calendar().list()
+const calendars = await client.calendar.list()
 ```
 
 
@@ -358,7 +355,7 @@ church-calendar/
 Import the SDK from the package root:
 
 ```ts
-import { ChurchCalendarSDK } from 'church-calendar'
+import { ChurchCalendarSDK } from '@voxgig-sdk/church-calendar'
 ```
 
 ### Entity state
@@ -368,11 +365,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const calendar = client.calendar
+await calendar.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// calendar.data() now returns the loaded calendar data
+// calendar.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

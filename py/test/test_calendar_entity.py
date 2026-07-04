@@ -52,8 +52,7 @@ class TestCalendarEntity:
             "locale": setup["idmap"]["locale01"],
         }
 
-        calendar_ref01_list_result, err = calendar_ref01_ent.list(calendar_ref01_match, None)
-        assert err is None
+        calendar_ref01_list_result = calendar_ref01_ent.list(calendar_ref01_match, None)
         assert isinstance(calendar_ref01_list_result, list)
 
 
@@ -94,7 +93,6 @@ def _calendar_basic_setup(extra):
         "CHURCHCALENDAR_TEST_CALENDAR_ENTID": idmap,
         "CHURCHCALENDAR_TEST_LIVE": "FALSE",
         "CHURCHCALENDAR_TEST_EXPLAIN": "FALSE",
-        "CHURCHCALENDAR_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -105,7 +103,6 @@ def _calendar_basic_setup(extra):
     if env.get("CHURCHCALENDAR_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("CHURCHCALENDAR_APIKEY"),
             },
             extra or {},
         ])

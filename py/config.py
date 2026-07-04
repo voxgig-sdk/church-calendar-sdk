@@ -15,9 +15,6 @@ def make_config():
         },
         "options": {
             "base": "http://calapi.inadiutorium.cz",
-            "auth": {
-                "prefix": "Bearer",
-            },
             "headers": {
         "content-type": "application/json",
       },
@@ -96,6 +93,7 @@ def make_config():
                       "orig": "calendar",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                     {
                       "active": True,
@@ -105,6 +103,7 @@ def make_config():
                       "orig": "day",
                       "reqd": True,
                       "type": "`$INTEGER`",
+                      "index$": 1,
                     },
                     {
                       "active": True,
@@ -114,6 +113,7 @@ def make_config():
                       "orig": "month",
                       "reqd": True,
                       "type": "`$INTEGER`",
+                      "index$": 2,
                     },
                     {
                       "active": True,
@@ -123,6 +123,7 @@ def make_config():
                       "orig": "year",
                       "reqd": True,
                       "type": "`$INTEGER`",
+                      "index$": 3,
                     },
                   ],
                 },
@@ -164,6 +165,7 @@ def make_config():
                       "orig": "locale",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },

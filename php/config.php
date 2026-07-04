@@ -20,9 +20,6 @@ class ChurchCalendarConfig
             ],
             "options" => [
                 "base" => "http://calapi.inadiutorium.cz",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -101,6 +98,7 @@ class ChurchCalendarConfig
                         'orig' => 'calendar',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                       [
                         'active' => true,
@@ -110,6 +108,7 @@ class ChurchCalendarConfig
                         'orig' => 'day',
                         'reqd' => true,
                         'type' => '`$INTEGER`',
+                        'index$' => 1,
                       ],
                       [
                         'active' => true,
@@ -119,6 +118,7 @@ class ChurchCalendarConfig
                         'orig' => 'month',
                         'reqd' => true,
                         'type' => '`$INTEGER`',
+                        'index$' => 2,
                       ],
                       [
                         'active' => true,
@@ -128,6 +128,7 @@ class ChurchCalendarConfig
                         'orig' => 'year',
                         'reqd' => true,
                         'type' => '`$INTEGER`',
+                        'index$' => 3,
                       ],
                     ],
                   ],
@@ -169,6 +170,7 @@ class ChurchCalendarConfig
                         'orig' => 'locale',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                     ],
                   ],

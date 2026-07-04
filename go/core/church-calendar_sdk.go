@@ -245,6 +245,9 @@ func (sdk *ChurchCalendarSDK) Direct(fetchargs map[string]any) (map[string]any, 
 }
 
 
+// Calendar returns a Calendar entity bound to this client.
+// Idiomatic usage: client.Calendar(nil).List(nil, nil) or
+// client.Calendar(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ChurchCalendarSDK) Calendar(data map[string]any) ChurchCalendarEntity {
 	return NewCalendarEntityFunc(sdk, data)
 }

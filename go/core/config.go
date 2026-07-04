@@ -14,9 +14,6 @@ func MakeConfig() map[string]any {
 		},
 		"options": map[string]any{
 			"base": "http://calapi.inadiutorium.cz",
-			"auth": map[string]any{
-				"prefix": "Bearer",
-			},
 			"headers": map[string]any{
 				"content-type": "application/json",
 			},
@@ -95,6 +92,7 @@ func MakeConfig() map[string]any {
 											"orig": "calendar",
 											"reqd": true,
 											"type": "`$STRING`",
+											"index$": 0,
 										},
 										map[string]any{
 											"active": true,
@@ -104,6 +102,7 @@ func MakeConfig() map[string]any {
 											"orig": "day",
 											"reqd": true,
 											"type": "`$INTEGER`",
+											"index$": 1,
 										},
 										map[string]any{
 											"active": true,
@@ -113,6 +112,7 @@ func MakeConfig() map[string]any {
 											"orig": "month",
 											"reqd": true,
 											"type": "`$INTEGER`",
+											"index$": 2,
 										},
 										map[string]any{
 											"active": true,
@@ -122,6 +122,7 @@ func MakeConfig() map[string]any {
 											"orig": "year",
 											"reqd": true,
 											"type": "`$INTEGER`",
+											"index$": 3,
 										},
 									},
 								},
@@ -163,6 +164,7 @@ func MakeConfig() map[string]any {
 											"orig": "locale",
 											"reqd": true,
 											"type": "`$STRING`",
+											"index$": 0,
 										},
 									},
 								},

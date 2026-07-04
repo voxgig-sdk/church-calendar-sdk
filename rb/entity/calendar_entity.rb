@@ -45,6 +45,7 @@ class CalendarEntity
     end
   end
 
+  # @return [Calendar, Hash] the current Calendar data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class CalendarEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Calendar fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class CalendarEntity
   
 
   
+  # List Calendar items matching the given filter.
+  #
+  # @param reqmatch [CalendarListMatch, Hash, nil] match filter (any subset of Calendar fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Calendar>, Array] the matching Calendar items; raises ChurchCalendarError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
