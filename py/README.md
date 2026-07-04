@@ -31,14 +31,16 @@ from churchcalendar_sdk import ChurchCalendarSDK
 client = ChurchCalendarSDK()
 ```
 
-### 2. List calendars
+### 2. List calendar records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.calendar.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    calendars = client.Calendar().list({})
+    for calendar in calendars:
+        print(calendar)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -86,8 +88,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = ChurchCalendarSDK.test()
 
-result = client.calendar.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+calendar = client.Calendar().load({"id": "test01"})
+# calendar contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -226,7 +229,7 @@ API path: `/api/v0/en/calendars/{calendar}/{year}/{month}/{day}`
 
 ### Calendar
 
-Create an instance: `const calendar = client.calendar`
+Create an instance: `calendar = client.Calendar()`
 
 #### Operations
 
@@ -248,8 +251,8 @@ Create an instance: `const calendar = client.calendar`
 
 #### Example: List
 
-```ts
-const calendars = await client.calendar.list()
+```python
+calendars = client.Calendar().list({})
 ```
 
 
@@ -323,7 +326,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-calendar = client.calendar
+calendar = client.Calendar()
 calendar.load({"id": "example_id"})
 
 # calendar.data_get() now returns the loaded calendar data

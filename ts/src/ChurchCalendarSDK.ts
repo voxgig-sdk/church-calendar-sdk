@@ -204,14 +204,7 @@ class ChurchCalendarSDK {
 
 
 
-  _calendar?: CalendarEntity
-
-  // Idiomatic facade: `client.calendar.list()` / `client.calendar.load({ id })`.
-  get calendar(): CalendarEntity {
-    return (this._calendar ??= new CalendarEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.calendar` instead. */
+  // Entity access: `client.Calendar().list()` / `client.Calendar().load({ id })`.
   Calendar(data?: any) {
     const self = this
     return new CalendarEntity(self,data)

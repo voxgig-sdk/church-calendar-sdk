@@ -109,7 +109,7 @@ Alias for `ChurchCalendarSDK.test()`.
 ## CalendarEntity
 
 ```ts
-const calendar = client.calendar
+const calendar = client.Calendar()
 ```
 
 ### Fields
@@ -131,7 +131,7 @@ const calendar = client.calendar
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.calendar.list()
+const results = await client.Calendar().list()
 ```
 
 ### Common Methods

@@ -29,18 +29,16 @@ require_once 'churchcalendar_sdk.php';
 $client = new ChurchCalendarSDK();
 ```
 
-### 2. List calendars
+### 2. List calendar records
 
 ```php
 try {
-    $result = $client->calendar()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Calendar records — iterate directly.
+    $calendars = $client->Calendar()->list();
+    foreach ($calendars as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -86,13 +84,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = ChurchCalendarSDK::test();
+$client = ChurchCalendarSDK::test([
+    "entity" => ["calendar" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->calendar()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$calendar = $client->Calendar()->load(["id" => "test01"]);
+print_r($calendar);
 ```
 
 ### Use a custom fetch function
@@ -234,7 +236,7 @@ API path: `/api/v0/en/calendars/{calendar}/{year}/{month}/{day}`
 
 ### Calendar
 
-Create an instance: `const calendar = client.calendar`
+Create an instance: `$calendar = $client->Calendar();`
 
 #### Operations
 
@@ -256,8 +258,9 @@ Create an instance: `const calendar = client.calendar`
 
 #### Example: List
 
-```ts
-const calendars = await client.calendar.list()
+```php
+// list() returns an array of Calendar records (throws on error).
+$calendars = $client->Calendar()->list();
 ```
 
 
@@ -332,7 +335,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$calendar = $client->calendar();
+$calendar = $client->Calendar();
 $calendar->load(["id" => "example_id"]);
 
 // $calendar->dataGet() now returns the loaded calendar data

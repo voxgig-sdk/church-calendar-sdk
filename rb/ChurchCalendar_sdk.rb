@@ -208,13 +208,7 @@ class ChurchCalendarSDK
   end
 
 
-  # Idiomatic facade: client.calendar.list / client.calendar.load({ "id" => ... })
-  def calendar
-    require_relative 'entity/calendar_entity'
-    @calendar ||= CalendarEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.calendar instead.
+  # Canonical facade: client.Calendar.list / client.Calendar.load({ "id" => ... })
   def Calendar(data = nil)
     require_relative 'entity/calendar_entity'
     CalendarEntity.new(self, data)

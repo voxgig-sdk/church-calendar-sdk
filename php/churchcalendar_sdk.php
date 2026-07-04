@@ -233,10 +233,10 @@ class ChurchCalendarSDK
 
     private $_calendar = null;
 
-    // Idiomatic facade: $client->calendar()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Calendar() (PHP method
-    // names are case-insensitive).
-    public function calendar($data = null)
+    // Canonical facade: $client->Calendar()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->calendar()
+    // resolves here too.
+    public function Calendar($data = null)
     {
         require_once __DIR__ . '/entity/calendar_entity.php';
         if ($data === null) {

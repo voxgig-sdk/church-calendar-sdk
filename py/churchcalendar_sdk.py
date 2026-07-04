@@ -220,25 +220,15 @@ class ChurchCalendarSDK:
         }
 
 
-    @property
-    def calendar(self):
-        """Idiomatic facade: client.calendar.list() / client.calendar.load({"id": ...})."""
-        from entity.calendar_entity import CalendarEntity
-        cached = getattr(self, "_calendar", None)
-        if cached is None:
-            cached = CalendarEntity(self, None)
-            self._calendar = cached
-        return cached
-
-    def Calendar(self, data=None):
-        # Deprecated: use client.calendar instead.
+    def Calendar(self, data=None) -> "CalendarEntity":
+        """Entity factory: client.Calendar().list({}) / client.Calendar().load({"id": ...})."""
         from entity.calendar_entity import CalendarEntity
         return CalendarEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "ChurchCalendarSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -258,3 +248,9 @@ class ChurchCalendarSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.calendar_entity import CalendarEntity

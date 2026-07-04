@@ -26,9 +26,11 @@ import { ChurchCalendarSDK } from '@voxgig-sdk/church-calendar'
 
 const client = new ChurchCalendarSDK()
 
-// List all calendars
-const calendars = await client.calendar.list()
-console.log(calendars.data)
+// List all calendars (returns Calendar[])
+const calendars = await client.Calendar().list()
+for (const calendar of calendars) {
+  console.log(calendar)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -83,9 +85,10 @@ from churchcalendar_sdk import ChurchCalendarSDK
 
 client = ChurchCalendarSDK()
 
-# List all calendars
-calendars = client.calendar.list()
-print(calendars)
+# List all calendars (returns a list, raises on error)
+calendars = client.Calendar().list({})
+for calendar in calendars:
+    print(calendar)
 ```
 
 ### PHP
@@ -96,8 +99,8 @@ require_once 'churchcalendar_sdk.php';
 
 $client = new ChurchCalendarSDK();
 
-// List all calendars (throws on error)
-$calendars = $client->calendar()->list();
+// List all calendars (returns an array; throws on error)
+$calendars = $client->Calendar()->list();
 print_r($calendars);
 ```
 
@@ -120,8 +123,8 @@ require_relative "ChurchCalendar_sdk"
 
 client = ChurchCalendarSDK.new
 
-# List all calendars
-calendars = client.calendar.list
+# List all calendars (returns an Array; raises on error)
+calendars = client.Calendar.list
 puts calendars
 ```
 
@@ -133,7 +136,7 @@ local sdk = require("church-calendar_sdk")
 local client = sdk.new()
 
 -- List all calendars
-local calendars, err = client:calendar():list()
+local calendars, err = client:Calendar():list()
 print(calendars)
 ```
 
@@ -146,22 +149,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = ChurchCalendarSDK.test()
-const result = await client.calendar.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const calendar = await client.Calendar().load({ id: 'test01' })
+// calendar is a bare Calendar populated with mock data
+console.log(calendar)
 ```
 
 ### Python
 
 ```python
 client = ChurchCalendarSDK.test()
-result = client.calendar.load({"id": "test01"})
+calendar = client.Calendar().load({"id": "test01"})
+print(calendar)
 ```
 
 ### PHP
 
 ```php
-$client = ChurchCalendarSDK::test();
-$result = $client->calendar()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = ChurchCalendarSDK::test([
+    "entity" => ["calendar" => ["test01" => ["id" => "test01"]]],
+]);
+$calendar = $client->Calendar()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -176,15 +184,18 @@ result, err := client.Calendar(nil).Load(
 ### Ruby
 
 ```ruby
-client = ChurchCalendarSDK.test
-result = client.calendar.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = ChurchCalendarSDK.test({
+  "entity" => { "calendar" => { "test01" => { "id" => "test01" } } },
+})
+calendar = client.Calendar.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:calendar():load({ id = "test01" })
+local result, err = client:Calendar():load({ id = "test01" })
 ```
 
 ## How it works
@@ -232,6 +243,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

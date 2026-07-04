@@ -85,7 +85,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## CalendarEntity
 
 ```php
-$calendar = $client->calendar();
+$calendar = $client->Calendar();
 ```
 
 ### Fields
@@ -107,7 +107,7 @@ $calendar = $client->calendar();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->calendar()->list([]);
+$results = $client->Calendar()->list([]);
 ```
 
 ### Common Methods

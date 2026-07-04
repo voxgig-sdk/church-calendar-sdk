@@ -86,7 +86,7 @@ same parameters as `direct()`. Raises on error.
 ## CalendarEntity
 
 ```ruby
-calendar = client.calendar
+calendar = client.Calendar
 ```
 
 ### Fields
@@ -108,7 +108,7 @@ calendar = client.calendar
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.calendar.list(nil)
+results = client.Calendar.list(nil)
 ```
 
 ### Common Methods

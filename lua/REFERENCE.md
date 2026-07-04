@@ -83,7 +83,7 @@ same parameters as `direct()`.
 ## CalendarEntity
 
 ```lua
-local calendar = client:calendar(nil)
+local calendar = client:Calendar(nil)
 ```
 
 ### Fields
@@ -105,7 +105,7 @@ local calendar = client:calendar(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:calendar():list()
+local results, err = client:Calendar():list()
 ```
 
 ### Common Methods

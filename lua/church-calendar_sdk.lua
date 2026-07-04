@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:calendar():list() / client:calendar():load({ id = ... })
-function ChurchCalendarSDK:calendar(data)
+-- Idiomatic facade: client:Calendar():list() / client:Calendar():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function ChurchCalendarSDK:Calendar(data)
   local EntityMod = require("entity.calendar_entity")
   if data == nil then
     if self._calendar == nil then
@@ -253,12 +254,6 @@ function ChurchCalendarSDK:calendar(data)
     end
     return self._calendar
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:calendar() instead.
-function ChurchCalendarSDK:Calendar(data)
-  local EntityMod = require("entity.calendar_entity")
   return EntityMod.new(self, data)
 end
 

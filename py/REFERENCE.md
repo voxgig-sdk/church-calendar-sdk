@@ -80,7 +80,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## CalendarEntity
 
 ```python
-calendar = client.calendar
+calendar = client.Calendar()
 ```
 
 ### Fields
@@ -102,7 +102,9 @@ calendar = client.calendar
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.calendar.list({})
+results = client.Calendar().list({})
+for calendar in results:
+    print(calendar)
 ```
 
 ### Common Methods
