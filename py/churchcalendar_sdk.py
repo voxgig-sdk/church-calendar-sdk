@@ -221,7 +221,7 @@ class ChurchCalendarSDK:
 
 
     def Calendar(self, data=None) -> "CalendarEntity":
-        """Entity factory: client.Calendar().list({}) / client.Calendar().load({"id": ...})."""
+        """Entity factory: client.Calendar().list() / client.Calendar().load({"id": ...})."""
         from entity.calendar_entity import CalendarEntity
         return CalendarEntity(self, data)
 

@@ -8,7 +8,7 @@ Complete API reference for the ChurchCalendar Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'church-calendar_sdk'
+require_relative 'ChurchCalendar_sdk'
 
 client = ChurchCalendarSDK.new(options)
 ```
@@ -93,22 +93,22 @@ calendar = client.Calendar
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `colour` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `rank` | ``$STRING`` | No |  |
-| `rank_num` | ``$NUMBER`` | No |  |
-| `system` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | No |  |
+| `colour` | `String` | No |  |
+| `description` | `String` | No |  |
+| `name` | `String` | No |  |
+| `rank` | `String` | No |  |
+| `rank_num` | `Float` | No |  |
+| `system` | `String` | No |  |
+| `title` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Calendar.list(nil)
+results = client.Calendar.list
 ```
 
 ### Common Methods

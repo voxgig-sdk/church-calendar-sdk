@@ -116,13 +116,13 @@ const calendar = client.Calendar()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `colour` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `rank` | ``$STRING`` | No |  |
-| `rank_num` | ``$NUMBER`` | No |  |
-| `system` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | No |  |
+| `colour` | `string` | No |  |
+| `description` | `string` | No |  |
+| `name` | `string` | No |  |
+| `rank` | `string` | No |  |
+| `rank_num` | `number` | No |  |
+| `system` | `string` | No |  |
+| `title` | `string` | No |  |
 
 ### Operations
 

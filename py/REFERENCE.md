@@ -8,7 +8,7 @@ Complete API reference for the ChurchCalendar Python SDK.
 ### Constructor
 
 ```python
-from church-calendar_sdk import ChurchCalendarSDK
+from churchcalendar_sdk import ChurchCalendarSDK
 
 client = ChurchCalendarSDK(options)
 ```
@@ -87,22 +87,22 @@ calendar = client.Calendar()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `colour` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `rank` | ``$STRING`` | No |  |
-| `rank_num` | ``$NUMBER`` | No |  |
-| `system` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | No |  |
+| `colour` | `str` | No |  |
+| `description` | `str` | No |  |
+| `name` | `str` | No |  |
+| `rank` | `str` | No |  |
+| `rank_num` | `float` | No |  |
+| `system` | `str` | No |  |
+| `title` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Calendar().list({})
+results = client.Calendar().list()
 for calendar in results:
     print(calendar)
 ```

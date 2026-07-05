@@ -66,8 +66,12 @@ class CalendarEntity:
     
 
     
-    def list(self, reqmatch: CalendarListMatch, ctrl=None) -> list[Calendar]:
+    def list(self, reqmatch=None, ctrl=None) -> list[Calendar]:
         utility = self._utility
+        # reqmatch is optional: an omitted match lists all records. Treat None
+        # as an empty match so client.Calendar().list() works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "list",
             "ctrl": ctrl,
