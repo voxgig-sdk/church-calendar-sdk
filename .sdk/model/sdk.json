@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -321,14 +318,17 @@
           "url": "http://calapi.inadiutorium.cz/api-doc"
         },
         "description": "The Church Calendar API provides access to calendar data for any day, allowing users to retrieve various liturgical celebrations and details. It supports multiple languages and enables specific queries for feast names and calendar descriptions based on the selected calendar system.",
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server",
             "url": "http://calapi.inadiutorium.cz"
           }
         ],
+        "summary": "The Church Calendar API provides access to calendar data for any day, allowing users to retrieve various liturgical celebrations and details.",
         "title": "Church Calendar API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "http://calapi.inadiutorium.cz"
       },
       "option": {},
       "target": {
@@ -381,6 +381,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -431,6 +434,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

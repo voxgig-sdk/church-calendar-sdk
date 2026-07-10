@@ -21,11 +21,11 @@ type Calendar struct {
 
 // CalendarListMatch is the typed request payload for Calendar.ListTyped.
 type CalendarListMatch struct {
-	Calendar string `json:"calendar"`
-	Day int `json:"day"`
-	Month int `json:"month"`
-	Year int `json:"year"`
-	Locale string `json:"locale"`
+	Calendar *string `json:"calendar,omitempty"`
+	Day *int `json:"day,omitempty"`
+	Month *int `json:"month,omitempty"`
+	Year *int `json:"year,omitempty"`
+	Locale *string `json:"locale,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

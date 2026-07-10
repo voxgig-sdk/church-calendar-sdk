@@ -15,9 +15,9 @@ main: {
           url: "http://calapi.inadiutorium.cz"
         }
       ]
+      summary: "The Church Calendar API provides access to calendar data for any day, allowing users to retrieve various liturgical celebrations and details."
       title: "Church Calendar API"
       version: "1.0.0"
+      website: "http://calapi.inadiutorium.cz"
     }
   }
-}
-

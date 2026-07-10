@@ -27,10 +27,10 @@ class Calendar
 /** Request payload for Calendar#list. */
 class CalendarListMatch
 {
-    public string $calendar;
-    public int $day;
-    public int $month;
-    public int $year;
-    public string $locale;
+    public ?string $calendar = null;
+    public ?int $day = null;
+    public ?int $month = null;
+    public ?int $year = null;
+    public ?string $locale = null;
 }
 

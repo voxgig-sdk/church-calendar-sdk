@@ -26,7 +26,7 @@ class Calendar(TypedDict, total=False):
     title: str
 
 
-class CalendarListMatch(TypedDict):
+class CalendarListMatch(TypedDict, total=False):
     calendar: str
     day: int
     month: int

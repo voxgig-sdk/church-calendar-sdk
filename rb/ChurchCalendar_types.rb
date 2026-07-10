@@ -44,19 +44,19 @@ Calendar = Struct.new(
 # Request payload for Calendar#list.
 #
 # @!attribute [rw] calendar
-#   @return [String]
+#   @return [String, nil]
 #
 # @!attribute [rw] day
-#   @return [Integer]
+#   @return [Integer, nil]
 #
 # @!attribute [rw] month
-#   @return [Integer]
+#   @return [Integer, nil]
 #
 # @!attribute [rw] year
-#   @return [Integer]
+#   @return [Integer, nil]
 #
 # @!attribute [rw] locale
-#   @return [String]
+#   @return [String, nil]
 CalendarListMatch = Struct.new(
   :calendar,
   :day,

@@ -16,10 +16,10 @@ export interface Calendar {
 }
 
 export interface CalendarListMatch {
-  calendar: string
-  day: number
-  month: number
-  year: number
-  locale: string
+  calendar?: string
+  day?: number
+  month?: number
+  year?: number
+  locale?: string
 }
 

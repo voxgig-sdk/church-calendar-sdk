@@ -16,11 +16,11 @@
 ---@field title? string
 
 ---@class CalendarListMatch
----@field calendar string
----@field day number
----@field month number
----@field year number
----@field locale string
+---@field calendar? string
+---@field day? number
+---@field month? number
+---@field year? number
+---@field locale? string
 
 local M = {}
 
