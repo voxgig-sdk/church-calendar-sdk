@@ -1,4 +1,4 @@
--- ProjectName SDK configuration
+-- ChurchCalendar SDK configuration
 
 local function make_config()
   return {

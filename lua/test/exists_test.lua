@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- ChurchCalendar SDK exists test
 
 local sdk = require("church-calendar_sdk")
 
