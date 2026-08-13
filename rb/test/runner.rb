@@ -23,8 +23,8 @@ module ChurchCalendarTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("CHURCHCALENDAR_TEST_LIVE")
-    override = getenv("CHURCHCALENDAR_TEST_OVERRIDE")
+    live = getenv("CHURCH_CALENDAR_TEST_LIVE")
+    override = getenv("CHURCH_CALENDAR_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module ChurchCalendarTestRunner
       end
     end
 
-    explain = getenv("CHURCHCALENDAR_TEST_EXPLAIN")
-    m["CHURCHCALENDAR_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("CHURCH_CALENDAR_TEST_EXPLAIN")
+    m["CHURCH_CALENDAR_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

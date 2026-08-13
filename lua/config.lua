@@ -126,6 +126,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v0/en/calendars/{calendar}/{year}/{month}/{day}",
                 ["parts"] = {
@@ -148,7 +149,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.celebrations`",
                 },
                 ["index$"] = 0,
               },
@@ -168,6 +169,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/v0/{locale}/calendars",
                 ["parts"] = {

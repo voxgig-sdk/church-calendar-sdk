@@ -37,7 +37,7 @@ class CalendarEntity extends ChurchCalendarEntityBase<Calendar> {
 
 
 
-  async list(this: any, reqmatch?: CalendarListMatch, ctrl?: Control): Promise<Calendar[]> {
+  async list(this: any, reqmatch?: CalendarListMatch, ctrl?: Control): Promise<CalendarEntity[]> {
 
     const utility = this._utility
 

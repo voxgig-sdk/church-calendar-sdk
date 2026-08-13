@@ -65,9 +65,10 @@ func TestCalendarDirect(t *testing.T) {
 			"params": params,
 		})
 		if setup.live {
-			// Live mode is lenient: synthetic IDs frequently 4xx and the
-			// list-response shape varies wildly across public APIs. Skip
-			// rather than fail when the call doesn't return a usable list.
+			// Live-mode leniency is a model decision
+			// (main.kit.test.live.strict): synthetic IDs 4xx constantly
+			// against an arbitrary public API, so the default SKIPS here.
+			// A project that owns its test server sets strict and FAILS.
 			if err != nil {
 				t.Skipf("list call failed (likely synthetic IDs against live API): %v", err)
 			}
@@ -140,11 +141,11 @@ func calendarDirectSetup(mockres any) *calendarDirectSetupResult {
 	calls := &[]map[string]any{}
 
 	env := envOverride(map[string]any{
-		"CHURCHCALENDAR_TEST_CALENDAR_ENTID": map[string]any{},
-		"CHURCHCALENDAR_TEST_LIVE":    "FALSE",
+		"CHURCH_CALENDAR_TEST_CALENDAR_ENTID": map[string]any{},
+		"CHURCH_CALENDAR_TEST_LIVE":    "FALSE",
 	})
 
-	live := env["CHURCHCALENDAR_TEST_LIVE"] == "TRUE"
+	live := env["CHURCH_CALENDAR_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
@@ -152,7 +153,7 @@ func calendarDirectSetup(mockres any) *calendarDirectSetupResult {
 		client := sdk.NewChurchCalendarSDK(mergedOpts)
 
 		idmap := map[string]any{}
-		if entidRaw, ok := env["CHURCHCALENDAR_TEST_CALENDAR_ENTID"]; ok {
+		if entidRaw, ok := env["CHURCH_CALENDAR_TEST_CALENDAR_ENTID"]; ok {
 			if entidStr, ok := entidRaw.(string); ok && strings.HasPrefix(entidStr, "{") {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {

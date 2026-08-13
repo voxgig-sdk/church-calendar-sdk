@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'ChurchCalendar',
   }
 
 
@@ -156,6 +156,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/v0/en/calendars/{calendar}/{year}/{month}/{day}",
               "parts": [
@@ -178,7 +179,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.celebrations`"
               },
               "index$": 0
             },
@@ -198,6 +199,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/v0/{locale}/calendars",
               "parts": [

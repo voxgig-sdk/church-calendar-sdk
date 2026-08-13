@@ -132,6 +132,7 @@ class ChurchCalendarConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/v0/en/calendars/{calendar}/{year}/{month}/{day}',
                   'parts' => [
@@ -154,7 +155,7 @@ class ChurchCalendarConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.celebrations`',
                   ],
                   'index$' => 0,
                 ],
@@ -174,6 +175,7 @@ class ChurchCalendarConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/v0/{locale}/calendars',
                   'parts' => [

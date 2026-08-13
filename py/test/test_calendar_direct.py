@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from churchcalendar_sdk.utility.voxgig_struct import voxgig_struct as vs
 from churchcalendar_sdk import ChurchCalendarSDK
-from core import helpers
+from churchcalendar_sdk.core import helpers
 from test import runner
 
 
@@ -82,11 +82,11 @@ def _calendar_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "CHURCHCALENDAR_TEST_CALENDAR_ENTID": {},
-        "CHURCHCALENDAR_TEST_LIVE": "FALSE",
+        "CHURCH_CALENDAR_TEST_CALENDAR_ENTID": {},
+        "CHURCH_CALENDAR_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("CHURCHCALENDAR_TEST_LIVE") == "TRUE"
+    live = env.get("CHURCH_CALENDAR_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

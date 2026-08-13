@@ -90,11 +90,11 @@ function calendar_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["CHURCHCALENDAR_TEST_CALENDAR_ENTID"] = {},
-    ["CHURCHCALENDAR_TEST_LIVE"] = "FALSE",
+    ["CHURCH_CALENDAR_TEST_CALENDAR_ENTID"] = {},
+    ["CHURCH_CALENDAR_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["CHURCHCALENDAR_TEST_LIVE"] == "TRUE"
+  local live = env["CHURCH_CALENDAR_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

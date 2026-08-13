@@ -95,11 +95,11 @@ function calendar_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "CHURCHCALENDAR_TEST_CALENDAR_ENTID" => [],
-        "CHURCHCALENDAR_TEST_LIVE" => "FALSE",
+        "CHURCH_CALENDAR_TEST_CALENDAR_ENTID" => [],
+        "CHURCH_CALENDAR_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["CHURCHCALENDAR_TEST_LIVE"] === "TRUE";
+    $live = $env["CHURCH_CALENDAR_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

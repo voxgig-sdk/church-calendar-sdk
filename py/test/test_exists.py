@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# ChurchCalendar SDK exists test
 
 import pytest
 from churchcalendar_sdk import ChurchCalendarSDK

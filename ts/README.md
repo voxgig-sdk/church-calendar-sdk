@@ -35,7 +35,9 @@ const client = new ChurchCalendarSDK()
 
 ### 2. List calendar records
 
-`list()` resolves to an array of Calendar objects — iterate it directly:
+`list()` resolves to an array of Calendar ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const calendars = await client.Calendar().list()
@@ -120,7 +122,8 @@ Create a mock client for unit testing — no server required:
 const client = ChurchCalendarSDK.test()
 
 const calendar = await client.Calendar().list()
-// calendar is a bare entity populated with mock response data
+// calendar is the entity, populated with mock response data
+// — call calendar.data() for the record itself
 console.log(calendar)
 ```
 

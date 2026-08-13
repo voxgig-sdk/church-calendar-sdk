@@ -127,6 +127,7 @@ module ChurchCalendarConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v0/en/calendars/{calendar}/{year}/{month}/{day}",
                   "parts" => [
@@ -149,7 +150,7 @@ module ChurchCalendarConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.celebrations`",
                   },
                   "index$" => 0,
                 },
@@ -169,6 +170,7 @@ module ChurchCalendarConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/v0/{locale}/calendars",
                   "parts" => [

@@ -43,8 +43,8 @@ class ChurchCalendarTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('CHURCHCALENDAR_TEST_LIVE');
-        $override = self::getenv('CHURCHCALENDAR_TEST_OVERRIDE');
+        $live = self::getenv('CHURCH_CALENDAR_TEST_LIVE');
+        $override = self::getenv('CHURCH_CALENDAR_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class ChurchCalendarTestRunner
             }
         }
 
-        $explain = self::getenv('CHURCHCALENDAR_TEST_EXPLAIN');
+        $explain = self::getenv('CHURCH_CALENDAR_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['CHURCHCALENDAR_TEST_EXPLAIN'] = $explain;
+            $m['CHURCH_CALENDAR_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import ChurchCalendarControl
-from core.error import ChurchCalendarError
-from core.result import ChurchCalendarResult
-from core.spec import ChurchCalendarSpec
+from churchcalendar_sdk.config import make_config
+from churchcalendar_sdk.features import _make_feature
+from churchcalendar_sdk.core.control import ChurchCalendarControl
+from churchcalendar_sdk.core.error import ChurchCalendarError
+from churchcalendar_sdk.core.result import ChurchCalendarResult
+from churchcalendar_sdk.core.spec import ChurchCalendarSpec
 
 
 # True when this SDK was generated with the named feature.

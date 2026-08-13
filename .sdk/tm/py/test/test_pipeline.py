@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import ChurchCalendarSDK
-from core.error import ChurchCalendarError
-from core.result import ChurchCalendarResult
-from core.response import ChurchCalendarResponse
-from core.spec import ChurchCalendarSpec
-from feature.base_feature import ChurchCalendarBaseFeature
+from projectname_sdk.core.error import ChurchCalendarError
+from projectname_sdk.core.result import ChurchCalendarResult
+from projectname_sdk.core.response import ChurchCalendarResponse
+from projectname_sdk.core.spec import ChurchCalendarSpec
+from projectname_sdk.feature.base_feature import ChurchCalendarBaseFeature
 
 
 def _client():

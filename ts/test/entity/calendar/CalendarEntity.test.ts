@@ -26,8 +26,8 @@ import {
 describe('CalendarEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when CHURCHCALENDAR_TEST_LIVE=TRUE.
-  afterEach(liveDelay('CHURCHCALENDAR_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when CHURCH_CALENDAR_TEST_LIVE=TRUE.
+  afterEach(liveDelay('CHURCH_CALENDAR_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = ChurchCalendarSDK.test()
@@ -64,7 +64,7 @@ describe('CalendarEntity', async () => {
     const calendar_ref01_match: any = {}
     calendar_ref01_match['locale'] = setup.idmap['locale01']
 
-    const calendar_ref01_list = await calendar_ref01_ent.list(calendar_ref01_match)
+    const calendar_ref01_list = (await calendar_ref01_ent.list(calendar_ref01_match)).map((e: any) => e.data())
 
 
   })

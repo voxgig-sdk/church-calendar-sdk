@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = ChurchCalendarSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = ChurchCalendarSDK.test({
+  entity: {
+    calendar: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const calendars = await client.Calendar().list()
-// calendars is an array of bare Calendar records populated with mock data
+// calendars is an array of Calendar entities, populated with mock data
+// — call calendars[0].data() for the record itself
 console.log(calendars)
 ```
 
@@ -110,7 +119,7 @@ import { ChurchCalendarSDK } from '@voxgig-sdk/church-calendar'
 
 const client = new ChurchCalendarSDK()
 
-// List all calendars (returns Calendar[])
+// List all calendars (returns CalendarEntity[] — .data() for the record)
 const calendars = await client.Calendar().list()
 for (const calendar of calendars) {
   console.log(calendar)
@@ -343,6 +352,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [http://calapi.inadiutorium.cz/api-doc](http://calapi.inadiutorium.cz/api-doc)
 
