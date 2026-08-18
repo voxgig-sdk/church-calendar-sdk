@@ -4,7 +4,7 @@
 
 The Golang SDK for the ChurchCalendar API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
-It exposes the API as capitalised, semantic **Entities** — e.g. `client.Calendar(nil)` — each with the same small set of operations (`List`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.Calendar(nil)` — each with the same small set of operations (`List`, `Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -58,6 +58,13 @@ func main() {
     for _, item := range calendars.([]any) {
         fmt.Println(item)
     }
+
+    // Load a single calendar — the value is the loaded record.
+    calendar, err := client.Calendar(nil).Load(map[string]any{"calendar": "example_calendar", "day": 1, "month": 1, "year": 1}, nil)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println(calendar)
 }
 ```
 
@@ -228,6 +235,7 @@ All entities implement the `ChurchCalendarEntity` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
+| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
 | `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
@@ -241,6 +249,7 @@ operation's data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
+| `Load` | the entity record (`map[string]any`) |
 | `List` | a `[]any` of entity records |
 
 Check `err` first, then use the value directly (or the typed
@@ -260,17 +269,18 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"colour"` |  |
+| `"celebrations"` |  |
+| `"date"` |  |
 | `"description"` |  |
 | `"name"` |  |
-| `"rank"` |  |
-| `"rank_num"` |  |
+| `"season"` |  |
+| `"season_week"` |  |
 | `"system"` |  |
-| `"title"` |  |
+| `"weekday"` |  |
 
-Operations: List.
+Operations: List, Load.
 
-API path: `/api/v0/en/calendars/{calendar}/{year}/{month}/{day}`
+API path: `/api/v0/{locale}/calendars`
 
 
 
@@ -286,18 +296,30 @@ Create an instance: `calendar := client.Calendar(nil)`
 | Method | Description |
 | --- | --- |
 | `List(match, ctrl)` | List entities matching the criteria. |
+| `Load(match, ctrl)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `colour` | `string` |  |
+| `celebrations` | `[]any` |  |
+| `date` | `string` |  |
 | `description` | `string` |  |
 | `name` | `string` |  |
-| `rank` | `string` |  |
-| `rank_num` | `float64` |  |
+| `season` | `string` |  |
+| `season_week` | `int` |  |
 | `system` | `string` |  |
-| `title` | `string` |  |
+| `weekday` | `string` |  |
+
+#### Example: Load
+
+```go
+calendar, err := client.Calendar(nil).Load(map[string]any{"calendar": "calendar", "day": 1, "month": 1, "year": 1}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(calendar) // the loaded record
+```
 
 #### Example: List
 

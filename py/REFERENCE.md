@@ -87,13 +87,14 @@ calendar = client.Calendar()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `colour` | `str` | No |  |
+| `celebrations` | `list` | No |  |
+| `date` | `str` | No |  |
 | `description` | `str` | No |  |
 | `name` | `str` | No |  |
-| `rank` | `str` | No |  |
-| `rank_num` | `float` | No |  |
+| `season` | `str` | No |  |
+| `season_week` | `int` | No |  |
 | `system` | `str` | No |  |
-| `title` | `str` | No |  |
+| `weekday` | `str` | No |  |
 
 ### Operations
 
@@ -102,9 +103,17 @@ calendar = client.Calendar()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Calendar().list()
+results = client.Calendar().list({"locale": "example"})
 for calendar in results:
     print(calendar)
+```
+
+#### `load(reqmatch, ctrl=None) -> dict`
+
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
+
+```python
+result = client.Calendar().load({"calendar": "calendar", "day": 1, "month": 1, "year": 1})
 ```
 
 ### Common Methods

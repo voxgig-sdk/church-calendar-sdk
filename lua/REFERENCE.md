@@ -90,13 +90,14 @@ local calendar = client:Calendar(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `colour` | `string` | No |  |
+| `celebrations` | `table` | No |  |
+| `date` | `string` | No |  |
 | `description` | `string` | No |  |
 | `name` | `string` | No |  |
-| `rank` | `string` | No |  |
-| `rank_num` | `number` | No |  |
+| `season` | `string` | No |  |
+| `season_week` | `number` | No |  |
 | `system` | `string` | No |  |
-| `title` | `string` | No |  |
+| `weekday` | `string` | No |  |
 
 ### Operations
 
@@ -106,6 +107,14 @@ List entities matching the given criteria. Returns an array.
 
 ```lua
 local results, err = client:Calendar():list()
+```
+
+#### `load(reqmatch, ctrl) -> any, err`
+
+Load a single entity matching the given criteria.
+
+```lua
+local result, err = client:Calendar():load({ calendar = "calendar", day = 1, month = 1, year = 1 })
 ```
 
 ### Common Methods

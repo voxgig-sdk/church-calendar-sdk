@@ -92,13 +92,14 @@ $calendar = $client->Calendar();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `colour` | `string` | No |  |
+| `celebrations` | `array` | No |  |
+| `date` | `string` | No |  |
 | `description` | `string` | No |  |
 | `name` | `string` | No |  |
-| `rank` | `string` | No |  |
-| `rank_num` | `float` | No |  |
+| `season` | `string` | No |  |
+| `season_week` | `int` | No |  |
 | `system` | `string` | No |  |
-| `title` | `string` | No |  |
+| `weekday` | `string` | No |  |
 
 ### Operations
 
@@ -108,6 +109,14 @@ List entities matching the given criteria (call with no argument to list all). R
 
 ```php
 $results = $client->Calendar()->list();
+```
+
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
+
+Load a single entity matching the given criteria. Throws on error.
+
+```php
+$result = $client->Calendar()->load(["calendar" => "calendar", "day" => 1, "month" => 1, "year" => 1]);
 ```
 
 ### Common Methods

@@ -4,7 +4,7 @@
 
 The Ruby SDK for the ChurchCalendar API — an entity-oriented client using idiomatic Ruby conventions.
 
-The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Calendar` — with named operations (`list`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Calendar` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -37,10 +37,24 @@ begin
   # list returns an Array of Calendar records — iterate directly.
   calendars = client.Calendar.list
   calendars.each do |item|
-    puts "#{item["colour"]}"
+    puts "#{item["celebrations"]}"
   end
 rescue => err
   warn "list failed: #{err}"
+end
+```
+
+### 3. Load a calendar
+
+Calendar is nested under calendar, so provide the `calendar`.
+
+```ruby
+begin
+  # load returns the ENTITY — call data_get for the Calendar record (raises on error).
+  calendar = client.Calendar.load({ "calendar" => "example_calendar", "day" => 1, "month" => 1, "year" => 1 })
+  puts calendar
+rescue => err
+  warn "load failed: #{err}"
 end
 ```
 
@@ -206,6 +220,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
 | `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
@@ -237,17 +252,18 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `colour` |  |
+| `celebrations` |  |
+| `date` |  |
 | `description` |  |
 | `name` |  |
-| `rank` |  |
-| `rank_num` |  |
+| `season` |  |
+| `season_week` |  |
 | `system` |  |
-| `title` |  |
+| `weekday` |  |
 
-Operations: List.
+Operations: List, Load.
 
-API path: `/api/v0/en/calendars/{calendar}/{year}/{month}/{day}`
+API path: `/api/v0/{locale}/calendars`
 
 
 
@@ -263,18 +279,27 @@ Create an instance: `calendar = client.Calendar`
 | Method | Description |
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
+| `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `colour` | `String` |  |
+| `celebrations` | `Array` |  |
+| `date` | `String` |  |
 | `description` | `String` |  |
 | `name` | `String` |  |
-| `rank` | `String` |  |
-| `rank_num` | `Float` |  |
+| `season` | `String` |  |
+| `season_week` | `Integer` |  |
 | `system` | `String` |  |
-| `title` | `String` |  |
+| `weekday` | `String` |  |
+
+#### Example: Load
+
+```ruby
+# load returns the ENTITY — call data_get for the Calendar record (raises on error).
+calendar = client.Calendar.load({ "calendar" => "calendar", "day" => 1, "month" => 1, "year" => 1 })
+```
 
 #### Example: List
 

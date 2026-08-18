@@ -19,11 +19,11 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 This SDK exposes the API as a small set of **semantic entities** — Calendar — that you
 call directly, instead of assembling URL paths and query strings. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
-support (`list`):
+support (`list`, `load`):
 
 ```ts
 const client = new ChurchCalendarSDK()
-const items = await client.Calendar().list()
+const items = await client.Calendar().list({ locale: "example" })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -120,10 +120,19 @@ import { ChurchCalendarSDK } from '@voxgig-sdk/church-calendar'
 const client = new ChurchCalendarSDK()
 
 // List all calendars (returns CalendarEntity[] — .data() for the record)
-const calendars = await client.Calendar().list()
+const calendars = await client.Calendar().list({ locale: "example" })
 for (const calendar of calendars) {
   console.log(calendar)
 }
+
+// Load a specific calendar (returns a Calendar)
+const calendar = await client.Calendar().load({
+  calendar: 'example_calendar',
+  day: 1,
+  month: 1,
+  year: 1,
+})
+console.log(calendar)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -164,9 +173,9 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Calendar** | The Calendar entity (list). | `/api/v0/en/calendars/{calendar}/{year}/{month}/{day}` |
+| **Calendar** | The Calendar entity (list, load). | `/api/v0/{locale}/calendars` |
 
-The operations available across these entities are **list** — see each entity's
+The operations available across these entities are **load**, **list** — see each entity's
 own list above for exactly which it supports.
 
 ## Quickstart in other languages
@@ -179,9 +188,13 @@ from churchcalendar_sdk import ChurchCalendarSDK
 client = ChurchCalendarSDK()
 
 # List all calendars (returns a list, raises on error)
-calendars = client.Calendar().list()
+calendars = client.Calendar().list({"locale": "example"})
 for calendar in calendars:
     print(calendar)
+
+# Load a specific calendar (returns the record, raises on error)
+calendar = client.Calendar().load({"calendar": "example_calendar", "day": 1, "month": 1, "year": 1})
+print(calendar)
 ```
 
 ### PHP
@@ -195,6 +208,10 @@ $client = new ChurchCalendarSDK();
 // List all calendars (returns an array; throws on error)
 $calendars = $client->Calendar()->list();
 print_r($calendars);
+
+// Load a specific calendar (returns the ENTITY; call data_get() for the record; throws on error)
+$calendar = $client->Calendar()->load(["calendar" => "example_calendar", "day" => 1, "month" => 1, "year" => 1]);
+print_r($calendar);
 ```
 
 ### Golang
@@ -210,6 +227,15 @@ if err != nil {
     panic(err)
 }
 fmt.Println(calendars)
+
+// Load a specific calendar
+calendar, err := client.Calendar(nil).Load(
+    map[string]any{"calendar": "example_calendar", "day": 1, "month": 1, "year": 1}, nil,
+)
+if err != nil {
+    panic(err)
+}
+fmt.Println(calendar)
 ```
 
 ### Ruby
@@ -222,6 +248,10 @@ client = ChurchCalendarSDK.new
 # List all calendars (returns an Array; raises on error)
 calendars = client.Calendar.list
 puts calendars
+
+# Load a specific calendar (returns the ENTITY; call data_get for the record)
+calendar = client.Calendar.load({ "calendar" => "example_calendar", "day" => 1, "month" => 1, "year" => 1 })
+puts calendar
 ```
 
 ### Lua
@@ -234,6 +264,10 @@ local client = sdk.new()
 -- List all calendars
 local calendars, err = client:Calendar():list()
 print(calendars)
+
+-- Load a specific calendar
+local calendar, err = client:Calendar():load({ calendar = "example_calendar", day = 1, month = 1, year = 1 })
+print(calendar)
 ```
 
 ## Direct and prepare

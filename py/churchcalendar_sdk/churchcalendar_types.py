@@ -17,18 +17,22 @@ from typing import TypedDict, Any
 
 
 class Calendar(TypedDict, total=False):
-    colour: str
+    celebrations: list
+    date: str
     description: str
     name: str
-    rank: str
-    rank_num: float
+    season: str
+    season_week: int
     system: str
-    title: str
+    weekday: str
 
 
-class CalendarListMatch(TypedDict, total=False):
+class CalendarLoadMatch(TypedDict):
     calendar: str
     day: int
     month: int
     year: int
+
+
+class CalendarListMatch(TypedDict):
     locale: str

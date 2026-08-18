@@ -40,7 +40,7 @@ class ChurchCalendarSDK
         $utility = new ChurchCalendarUtility();
         $this->_utility = $utility;
 
-        $config = ChurchCalendarConfig::make_config();
+        $config = ChurchCalendarConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

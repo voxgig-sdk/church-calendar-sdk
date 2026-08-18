@@ -39,7 +39,7 @@ describe("CalendarEntity", function()
     assert.are.equal(3, #seen)
 
     -- Inbound: streaming active -> yields each item from the feature.
-    local config = require("config")()
+    local config = require("config_shared")()
     if type(config.feature) == "table" and config.feature.streaming ~= nil then
       local streamsdk = sdk.test(seed, { feature = { streaming = { active = true } } })
       local got = {}
@@ -60,7 +60,7 @@ describe("CalendarEntity", function()
     local setup = calendar_basic_setup(nil)
     -- Per-op sdk-test-control.json skip.
     local _live = setup.live or false
-    for _, _op in ipairs({"list"}) do
+    for _, _op in ipairs({"list", "load"}) do
       local _should_skip, _reason = runner.is_control_skipped("entityOp", "calendar." .. _op, _live and "live" or "unit")
       if _should_skip then
         pending(_reason or "skipped via sdk-test-control.json")
@@ -93,6 +93,12 @@ describe("CalendarEntity", function()
     assert.is_nil(err)
     assert.is_table(calendar_ref01_list_result)
 
+    -- LOAD
+    local calendar_ref01_match_dt0 = {}
+    local calendar_ref01_data_dt0_loaded, err = calendar_ref01_ent:load(calendar_ref01_match_dt0, nil)
+    assert.is_nil(err)
+    assert.is_not_nil(calendar_ref01_data_dt0_loaded)
+
   end)
 end)
 
@@ -116,7 +122,7 @@ function calendar_basic_setup(extra)
 
   -- Generate idmap via transform.
   local idmap = vs.transform(
-    { "calendar01", "calendar02", "calendar03", "v001", "v002", "v003", "locale01" },
+    { "calendar01", "calendar02", "calendar03", "v001", "v002", "v003", "locale01", "month01", "year01" },
     {
       ["`$PACK`"] = { "", {
         ["`$KEY`"] = "`$COPY`",

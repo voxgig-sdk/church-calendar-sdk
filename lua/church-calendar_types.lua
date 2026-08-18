@@ -7,20 +7,23 @@
 -- edit by hand.
 
 ---@class Calendar
----@field colour? string
+---@field celebrations? table
+---@field date? string
 ---@field description? string
 ---@field name? string
----@field rank? string
----@field rank_num? number
+---@field season? string
+---@field season_week? number
 ---@field system? string
----@field title? string
+---@field weekday? string
+
+---@class CalendarLoadMatch
+---@field calendar string
+---@field day number
+---@field month number
+---@field year number
 
 ---@class CalendarListMatch
----@field calendar? string
----@field day? number
----@field month? number
----@field year? number
----@field locale? string
+---@field locale string
 
 local M = {}
 

@@ -22,7 +22,7 @@ class CalendarDirectTest extends TestCase
             return;
         }
         if ($setup["live"]) {
-            foreach (["calendar01", "day01", "month01", "year01"] as $_liveKey) {
+            foreach (["locale01"] as $_liveKey) {
                 if (!isset($setup["idmap"][$_liveKey]) || $setup["idmap"][$_liveKey] === null) {
                     $this->markTestSkipped("live test needs $_liveKey via *_ENTID env var (synthetic IDs only)");
                     return;
@@ -33,28 +33,13 @@ class CalendarDirectTest extends TestCase
 
         $params = [];
         if ($setup["live"]) {
-            $params["calendar"] = $setup["idmap"]["calendar01"];
+            $params["locale"] = $setup["idmap"]["locale01"];
         } else {
-            $params["calendar"] = "direct01";
-        }
-        if ($setup["live"]) {
-            $params["day"] = $setup["idmap"]["day01"];
-        } else {
-            $params["day"] = "direct01";
-        }
-        if ($setup["live"]) {
-            $params["month"] = $setup["idmap"]["month01"];
-        } else {
-            $params["month"] = "direct01";
-        }
-        if ($setup["live"]) {
-            $params["year"] = $setup["idmap"]["year01"];
-        } else {
-            $params["year"] = "direct01";
+            $params["locale"] = "direct01";
         }
 
         $result = $client->direct([
-            "path" => "api/v0/en/calendars/{calendar}/{year}/{month}/{day}",
+            "path" => "api/v0/{locale}/calendars",
             "method" => "GET",
             "params" => $params,
         ]);
@@ -81,6 +66,65 @@ class CalendarDirectTest extends TestCase
             $this->assertEquals(200, Helpers::to_int($result["status"]));
             $this->assertIsArray($result["data"]);
             $this->assertCount(2, $result["data"]);
+            $this->assertCount(1, $setup["calls"]);
+        }
+    }
+
+    public function test_direct_load_calendar(): void
+    {
+        $setup = calendar_direct_setup(["id" => "direct01"]);
+        [$_shouldSkip, $_reason] = Runner::is_control_skipped("direct", "direct-load-calendar", $setup["live"] ? "live" : "unit");
+        if ($_shouldSkip) {
+            $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
+            return;
+        }
+        $client = $setup["client"];
+
+        $params = [];
+        $query = [];
+        if ($setup["live"]) {
+            $params["calendar"] = "default";
+            $params["day"] = 25;
+            $params["month"] = 12;
+            $params["year"] = 2024;
+        } else {
+            $params["calendar"] = "direct01";
+            $params["day"] = "direct02";
+            $params["month"] = "direct03";
+            $params["year"] = "direct04";
+        }
+
+        $result = $client->direct([
+            "path" => "api/v0/en/calendars/{calendar}/{year}/{month}/{day}",
+            "method" => "GET",
+            "params" => $params,
+            "query" => $query,
+        ]);
+        if ($setup["live"]) {
+            // Live mode is lenient: synthetic IDs frequently 4xx. Skip
+            // rather than fail when the load endpoint isn't reachable
+            // with the IDs we can construct from setup.idmap.
+            if (!empty($result["err"])) {
+                $this->markTestSkipped("load call failed (likely synthetic IDs against live API): " . (string)$result["err"]);
+                return;
+            }
+            if (empty($result["ok"])) {
+                $this->markTestSkipped("load call not ok (likely synthetic IDs against live API)");
+                return;
+            }
+            $status = Helpers::to_int($result["status"]);
+            if ($status < 200 || $status >= 300) {
+                $this->markTestSkipped("expected 2xx status, got " . $status);
+                return;
+            }
+        } else {
+            $this->assertArrayNotHasKey("err", $result);
+            $this->assertTrue($result["ok"]);
+            $this->assertEquals(200, Helpers::to_int($result["status"]));
+            $this->assertNotNull($result["data"]);
+            if (is_array($result["data"]) && isset($result["data"]["id"])) {
+                $this->assertEquals("direct01", $result["data"]["id"]);
+            }
             $this->assertCount(1, $setup["calls"]);
         }
     }

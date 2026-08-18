@@ -36,7 +36,7 @@ class Config {
 
 
   options = {
-    base: 'http://calapi.inadiutorium.cz',
+    base: "http://calapi.inadiutorium.cz",
 
     headers: {
       "content-type": "application/json"
@@ -55,53 +55,36 @@ class Config {
     "calendar": {
       "fields": [
         {
-          "active": true,
-          "name": "colour",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "name": "celebrations",
+          "type": "`$ARRAY`"
         },
         {
-          "active": true,
+          "name": "date",
+          "type": "`$STRING`"
+        },
+        {
           "name": "description",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "name",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
-          "name": "rank",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 3
+          "name": "season",
+          "type": "`$STRING`"
         },
         {
-          "active": true,
-          "name": "rank_num",
-          "req": false,
-          "type": "`$NUMBER`",
-          "index$": 4
+          "name": "season_week",
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "system",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 5
+          "type": "`$STRING`"
         },
         {
-          "active": true,
-          "name": "title",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 6
+          "name": "weekday",
+          "type": "`$STRING`"
         }
       ],
       "name": "calendar",
@@ -111,48 +94,77 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
+                    "example": "en",
+                    "kind": "param",
+                    "name": "locale",
+                    "orig": "locale",
+                    "reqd": true,
+                    "type": "`$STRING`"
+                  }
+                ]
+              },
+              "kind": "http",
+              "method": "GET",
+              "orig": "/api/v0/{locale}/calendars",
+              "parts": [
+                "api",
+                "v0",
+                "{locale}",
+                "calendars"
+              ],
+              "select": {
+                "exist": [
+                  "locale"
+                ]
+              },
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              }
+            }
+          ]
+        },
+        "load": {
+          "input": "data",
+          "name": "load",
+          "points": [
+            {
+              "args": {
+                "params": [
+                  {
                     "example": "default",
                     "kind": "param",
                     "name": "calendar",
                     "orig": "calendar",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": 25,
                     "kind": "param",
                     "name": "day",
                     "orig": "day",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 1
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "example": 12,
                     "kind": "param",
                     "name": "month",
                     "orig": "month",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 2
+                    "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "example": 2024,
                     "kind": "param",
                     "name": "year",
                     "orig": "year",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 3
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -179,48 +191,10 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body.celebrations`"
-              },
-              "index$": 0
-            },
-            {
-              "active": true,
-              "args": {
-                "params": [
-                  {
-                    "active": true,
-                    "example": "en",
-                    "kind": "param",
-                    "name": "locale",
-                    "orig": "locale",
-                    "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
-                  }
-                ]
-              },
-              "kind": "http",
-              "method": "GET",
-              "orig": "/api/v0/{locale}/calendars",
-              "parts": [
-                "api",
-                "v0",
-                "{locale}",
-                "calendars"
-              ],
-              "select": {
-                "exist": [
-                  "locale"
-                ]
-              },
-              "transform": {
-                "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 1
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {

@@ -42,8 +42,8 @@ class TestCalendarEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from churchcalendar_sdk.config import make_config
-        cfg = make_config()
+        from churchcalendar_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = ChurchCalendarSDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -61,7 +61,7 @@ class TestCalendarEntity:
         # multiple ops; skipping any one skips the whole flow (steps depend
         # on each other).
         _live = setup.get("live", False)
-        for _op in ["list"]:
+        for _op in ["list", "load"]:
             _skip, _reason = runner.is_control_skipped("entityOp", "calendar." + _op, "live" if _live else "unit")
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
@@ -89,6 +89,11 @@ class TestCalendarEntity:
         calendar_ref01_list_result = calendar_ref01_ent.list(calendar_ref01_match, None)
         assert isinstance(calendar_ref01_list_result, list)
 
+        # LOAD
+        calendar_ref01_match_dt0 = {}
+        calendar_ref01_data_dt0_loaded = calendar_ref01_ent.load(calendar_ref01_match_dt0, None)
+        assert calendar_ref01_data_dt0_loaded is not None
+
 
 
 def _calendar_basic_setup(extra):
@@ -107,7 +112,7 @@ def _calendar_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["calendar01", "calendar02", "calendar03", "v001", "v002", "v003", "locale01"],
+        ["calendar01", "calendar02", "calendar03", "v001", "v002", "v003", "locale01", "month01", "year01"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

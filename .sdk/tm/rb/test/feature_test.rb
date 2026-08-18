@@ -15,7 +15,7 @@ require_relative "../ChurchCalendar_sdk"
 module ChurchCalendarFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = ChurchCalendarConfig.make_config["feature"]
+    f = ChurchCalendarConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

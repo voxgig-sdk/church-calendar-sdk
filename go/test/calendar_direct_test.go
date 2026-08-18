@@ -28,7 +28,7 @@ func TestCalendarDirect(t *testing.T) {
 			return
 		}
 		if setup.live {
-			for _, _liveKey := range []string{"calendar01", "day01", "month01", "year01"} {
+			for _, _liveKey := range []string{"locale01"} {
 				if v := setup.idmap[_liveKey]; v == nil {
 					t.Skipf("live test needs %s via *_ENTID env var (synthetic IDs only)", _liveKey)
 					return
@@ -39,28 +39,13 @@ func TestCalendarDirect(t *testing.T) {
 
 		params := map[string]any{}
 		if setup.live {
-			params["calendar"] = setup.idmap["calendar01"]
+			params["locale"] = setup.idmap["locale01"]
 		} else {
-			params["calendar"] = "direct01"
-		}
-		if setup.live {
-			params["day"] = setup.idmap["day01"]
-		} else {
-			params["day"] = "direct02"
-		}
-		if setup.live {
-			params["month"] = setup.idmap["month01"]
-		} else {
-			params["month"] = "direct03"
-		}
-		if setup.live {
-			params["year"] = setup.idmap["year01"]
-		} else {
-			params["year"] = "direct04"
+			params["locale"] = "direct01"
 		}
 
 		result, err := client.Direct(map[string]any{
-			"path":   "api/v0/en/calendars/{calendar}/{year}/{month}/{day}",
+			"path":   "api/v0/{locale}/calendars",
 			"method": "GET",
 			"params": params,
 		})
@@ -98,6 +83,95 @@ func TestCalendarDirect(t *testing.T) {
 				}
 			} else {
 				t.Fatalf("expected data to be an array, got %T", result["data"])
+			}
+
+			if len(*setup.calls) != 1 {
+				t.Fatalf("expected 1 call, got %d", len(*setup.calls))
+			}
+			call := (*setup.calls)[0]
+			if initMap, ok := call["init"].(map[string]any); ok {
+				if initMap["method"] != "GET" {
+					t.Fatalf("expected method GET, got %v", initMap["method"])
+				}
+			}
+			if url, ok := call["url"].(string); ok {
+				if !strings.Contains(url, "direct01") {
+					t.Fatalf("expected url to contain direct01, got %v", url)
+				}
+			}
+		}
+	})
+
+	t.Run("direct-load-calendar", func(t *testing.T) {
+		setup := calendarDirectSetup(map[string]any{"id": "direct01"})
+		_mode := "unit"
+		if setup.live {
+			_mode = "live"
+		}
+		if _shouldSkip, _reason := isControlSkipped("direct", "direct-load-calendar", _mode); _shouldSkip {
+			if _reason == "" {
+				_reason = "skipped via sdk-test-control.json"
+			}
+			t.Skip(_reason)
+			return
+		}
+		client := setup.client
+
+		params := map[string]any{}
+		query := map[string]any{}
+		if setup.live {
+			params["calendar"] = "default"
+			params["day"] = 25
+			params["month"] = 12
+			params["year"] = 2024
+		} else {
+			params["calendar"] = "direct01"
+			params["day"] = "direct02"
+			params["month"] = "direct03"
+			params["year"] = "direct04"
+		}
+
+		result, err := client.Direct(map[string]any{
+			"path":   "api/v0/en/calendars/{calendar}/{year}/{month}/{day}",
+			"method": "GET",
+			"params": params,
+			"query":  query,
+		})
+		if setup.live {
+			// Live mode is lenient: synthetic IDs frequently 4xx. Skip
+			// rather than fail when the load endpoint isn't reachable with
+			// the IDs we can construct from setup.idmap — unless the model
+			// sets main.kit.test.live.strict.
+			if err != nil {
+				t.Skipf("load call failed (likely synthetic IDs against live API): %v", err)
+			}
+			if result["ok"] != true {
+				t.Skipf("load call not ok (likely synthetic IDs against live API): %v", result)
+			}
+			status := core.ToInt(result["status"])
+			if status < 200 || status >= 300 {
+				t.Skipf("expected 2xx status, got %v", result["status"])
+			}
+		} else {
+			if err != nil {
+				t.Fatalf("direct failed: %v", err)
+			}
+			if result["ok"] != true {
+				t.Fatalf("expected ok to be true, got %v", result["ok"])
+			}
+			if core.ToInt(result["status"]) != 200 {
+				t.Fatalf("expected status 200, got %v", result["status"])
+			}
+			if result["data"] == nil {
+				t.Fatal("expected data to be non-nil")
+			}
+		}
+
+		if !setup.live {
+			if dataMap, ok := result["data"].(map[string]any); ok {
+				if dataMap["id"] != "direct01" {
+					t.Fatalf("expected data.id to be direct01, got %v", dataMap["id"])
+				}
 			}
 
 			if len(*setup.calls) != 1 {

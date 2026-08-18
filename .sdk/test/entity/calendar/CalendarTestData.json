@@ -2,59 +2,66 @@
   "existing": {
     "calendar": {
       "CALENDAR00": {
-        "colour": "s46",
-        "description": "s47",
-        "name": "s48",
-        "rank": "s49",
-        "rank_num": 74,
-        "system": "s4b",
-        "title": "s4c",
+        "celebrations": [],
+        "date": "s51",
+        "description": "s52",
+        "name": "s53",
+        "season": "s54",
+        "season_week": "s55",
+        "system": "s56",
+        "weekday": "s57",
+        "locale": "LOCALE01",
         "calendar": "CALENDAR01",
         "day": "DAY01",
         "month": "MONTH01",
         "year": "YEAR01",
-        "locale": "LOCALE01"
+        "id": "CALENDAR00"
       },
       "CALENDAR01": {
-        "colour": "s8c",
-        "description": "s8d",
-        "name": "s8e",
-        "rank": "s8f",
-        "rank_num": 144,
-        "system": "s91",
-        "title": "s92",
+        "celebrations": [],
+        "date": "sa1",
+        "description": "sa2",
+        "name": "sa3",
+        "season": "sa4",
+        "season_week": "sa5",
+        "system": "sa6",
+        "weekday": "sa7",
+        "locale": "LOCALE01",
         "calendar": "CALENDAR01",
         "day": "DAY01",
         "month": "MONTH01",
         "year": "YEAR01",
-        "locale": "LOCALE01"
+        "id": "CALENDAR01"
       },
       "CALENDAR02": {
-        "colour": "sd2",
-        "description": "sd3",
-        "name": "sd4",
-        "rank": "sd5",
-        "rank_num": 214,
-        "system": "sd7",
-        "title": "sd8",
+        "celebrations": [],
+        "date": "sf1",
+        "description": "sf2",
+        "name": "sf3",
+        "season": "sf4",
+        "season_week": "sf5",
+        "system": "sf6",
+        "weekday": "sf7",
+        "locale": "LOCALE01",
         "calendar": "CALENDAR01",
         "day": "DAY01",
         "month": "MONTH01",
         "year": "YEAR01",
-        "locale": "LOCALE01"
+        "id": "CALENDAR02"
       }
     }
   },
   "new": {
     "calendar": {
       "calendar_ref01": {
-        "colour": "s118",
-        "description": "s119",
-        "name": "s11a",
-        "rank": "s11b",
-        "rank_num": 284,
-        "system": "s11d",
-        "title": "s11e"
+        "celebrations": [],
+        "date": "s141",
+        "description": "s142",
+        "name": "s143",
+        "season": "s144",
+        "season_week": "s145",
+        "system": "s146",
+        "weekday": "s147"
       }
     }
   }

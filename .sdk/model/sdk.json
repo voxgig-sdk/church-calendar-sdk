@@ -20,9 +20,11 @@
         ],
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "repr": "auto"
       },
       "contributor": {},
+      "docs": {},
       "entity": {
         "calendar": {
           "active": true,
@@ -32,7 +34,13 @@
           "fields": [
             {
               "active": true,
-              "name": "colour",
+              "name": "celebrations",
+              "req": false,
+              "type": "`$ARRAY`"
+            },
+            {
+              "active": true,
+              "name": "date",
               "req": false,
               "type": "`$STRING`"
             },
@@ -50,15 +58,15 @@
             },
             {
               "active": true,
-              "name": "rank",
+              "name": "season",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "rank_num",
+              "name": "season_week",
               "req": false,
-              "type": "`$NUMBER`"
+              "type": "`$INTEGER`"
             },
             {
               "active": true,
@@ -68,7 +76,7 @@
             },
             {
               "active": true,
-              "name": "title",
+              "name": "weekday",
               "req": false,
               "type": "`$STRING`"
             }
@@ -78,6 +86,46 @@
             "list": {
               "input": "data",
               "name": "list",
+              "points": [
+                {
+                  "active": true,
+                  "args": {
+                    "params": [
+                      {
+                        "active": true,
+                        "example": "en",
+                        "kind": "param",
+                        "name": "locale",
+                        "orig": "locale",
+                        "reqd": true,
+                        "type": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "kind": "http",
+                  "method": "GET",
+                  "orig": "/api/v0/{locale}/calendars",
+                  "parts": [
+                    "api",
+                    "v0",
+                    "{locale}",
+                    "calendars"
+                  ],
+                  "select": {
+                    "exist": [
+                      "locale"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            },
+            "load": {
+              "input": "data",
+              "name": "load",
               "points": [
                 {
                   "active": true,
@@ -144,40 +192,6 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body.celebrations`"
-                  }
-                },
-                {
-                  "active": true,
-                  "args": {
-                    "params": [
-                      {
-                        "active": true,
-                        "example": "en",
-                        "kind": "param",
-                        "name": "locale",
-                        "orig": "locale",
-                        "reqd": true,
-                        "type": "`$STRING`"
-                      }
-                    ]
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/v0/{locale}/calendars",
-                  "parts": [
-                    "api",
-                    "v0",
-                    "{locale}",
-                    "calendars"
-                  ],
-                  "select": {
-                    "exist": [
-                      "locale"
-                    ]
-                  },
-                  "transform": {
-                    "req": "`reqdata`",
                     "res": "`body`"
                   }
                 }
@@ -199,6 +213,7 @@
       "feature": {
         "test": {
           "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "config": {
             "options": {
               "active": false
@@ -259,6 +274,8 @@
             }
           },
           "name": "test",
+          "origname": "",
+          "package": "@voxgig/sdkgen",
           "target": {
             "go": {
               "deps": {}
@@ -315,6 +332,31 @@
                   }
                 }
               ]
+            },
+            {
+              "active": true,
+              "data": {},
+              "input": {
+                "ref": "calendar_ref01",
+                "srcdatavar": "calendar_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "calendar": "calendar01",
+                "id": "calendar01",
+                "month": "month01",
+                "year": "year01"
+              },
+              "op": "load",
+              "spec": [],
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-calendar_ref01"
+                  }
+                }
+              ]
             }
           ]
         }
@@ -349,6 +391,7 @@
             "name": "",
             "url": ""
           },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
           },
@@ -367,12 +410,14 @@
             "path": ""
           },
           "name": "go",
+          "origname": "",
           "output": {
             "adopt": false,
             "path": "",
             "repo": "",
             "sdkrel": ""
           },
+          "package": "@voxgig/sdkgen",
           "publish": {
             "registry": {
               "active": false,
@@ -406,6 +451,7 @@
             "name": "",
             "url": ""
           },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
           },
@@ -422,12 +468,14 @@
             "path": ""
           },
           "name": "go-cli",
+          "origname": "",
           "output": {
             "adopt": false,
             "path": "",
             "repo": "",
             "sdkrel": ""
           },
+          "package": "@voxgig/sdkgen",
           "phase": {
             "agentguide": {
               "active": false
@@ -477,6 +525,7 @@
             "name": "",
             "url": ""
           },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
           },
@@ -493,12 +542,14 @@
             "path": ""
           },
           "name": "go-mcp",
+          "origname": "",
           "output": {
             "adopt": false,
             "path": "",
             "repo": "",
             "sdkrel": ""
           },
+          "package": "@voxgig/sdkgen",
           "phase": {
             "agentguide": {
               "active": false
@@ -548,6 +599,7 @@
             "name": "",
             "url": ""
           },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "--"
           },
@@ -570,12 +622,14 @@
             "path": ""
           },
           "name": "lua",
+          "origname": "",
           "output": {
             "adopt": false,
             "path": "",
             "repo": "",
             "sdkrel": ""
           },
+          "package": "@voxgig/sdkgen",
           "publish": {
             "registry": {
               "active": false,
@@ -609,6 +663,7 @@
             "name": "",
             "url": ""
           },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
           },
@@ -625,12 +680,14 @@
             "path": ""
           },
           "name": "php",
+          "origname": "",
           "output": {
             "adopt": false,
             "path": "",
             "repo": "",
             "sdkrel": ""
           },
+          "package": "@voxgig/sdkgen",
           "publish": {
             "registry": {
               "active": false,
@@ -664,6 +721,7 @@
             "name": "",
             "url": ""
           },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "#"
           },
@@ -686,12 +744,14 @@
             "path": ""
           },
           "name": "py",
+          "origname": "",
           "output": {
             "adopt": false,
             "path": "",
             "repo": "",
             "sdkrel": ""
           },
+          "package": "@voxgig/sdkgen",
           "publish": {
             "registry": {
               "active": false,
@@ -725,6 +785,7 @@
             "name": "",
             "url": ""
           },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "#"
           },
@@ -752,12 +813,14 @@
             "path": ""
           },
           "name": "rb",
+          "origname": "",
           "output": {
             "adopt": false,
             "path": "",
             "repo": "",
             "sdkrel": ""
           },
+          "package": "@voxgig/sdkgen",
           "publish": {
             "registry": {
               "active": false,
@@ -824,12 +887,14 @@
             "path": ""
           },
           "name": "ts",
+          "origname": "",
           "output": {
             "adopt": false,
             "path": "",
             "repo": "",
             "sdkrel": ""
           },
+          "package": "@voxgig/sdkgen",
           "publish": {
             "registry": {
               "active": false,

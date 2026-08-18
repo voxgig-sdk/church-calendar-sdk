@@ -93,13 +93,14 @@ calendar = client.Calendar
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `colour` | `String` | No |  |
+| `celebrations` | `Array` | No |  |
+| `date` | `String` | No |  |
 | `description` | `String` | No |  |
 | `name` | `String` | No |  |
-| `rank` | `String` | No |  |
-| `rank_num` | `Float` | No |  |
+| `season` | `String` | No |  |
+| `season_week` | `Integer` | No |  |
 | `system` | `String` | No |  |
-| `title` | `String` | No |  |
+| `weekday` | `String` | No |  |
 
 ### Operations
 
@@ -109,6 +110,14 @@ List entities matching the given criteria (call with no argument to list all). R
 
 ```ruby
 results = client.Calendar.list
+```
+
+#### `load(reqmatch, ctrl = nil) -> result`
+
+Load a single entity matching the given criteria. Raises on error.
+
+```ruby
+result = client.Calendar.load({ "calendar" => "calendar", "day" => 1, "month" => 1, "year" => 1 })
 ```
 
 ### Common Methods

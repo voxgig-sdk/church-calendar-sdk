@@ -1,7 +1,30 @@
 # ChurchCalendar SDK configuration
 
 
+_shared_config = None
+
+
+def shared_config():
+    """Return the process-wide config, built once on first use.
+
+    The SDK reads the config on every request and never writes to it, so one
+    instance is shared by every client rather than rebuilt per client.
+
+    The returned dict is shared: treat it as read-only. Callers that need to
+    mutate should use make_config, which always returns a fresh copy.
+    """
+    global _shared_config
+    if _shared_config is None:
+        _shared_config = make_config()
+    return _shared_config
+
+
 def make_config():
+    """Build a fresh, fully materialised config dict.
+
+    Every call rebuilds the whole structure, so prefer shared_config unless
+    you need a private copy you intend to mutate.
+    """
     return {
         "main": {
             "name": "ChurchCalendar",
@@ -26,53 +49,36 @@ def make_config():
       "calendar": {
         "fields": [
           {
-            "active": True,
-            "name": "colour",
-            "req": False,
-            "type": "`$STRING`",
-            "index$": 0,
+            "name": "celebrations",
+            "type": "`$ARRAY`",
           },
           {
-            "active": True,
+            "name": "date",
+            "type": "`$STRING`",
+          },
+          {
             "name": "description",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "name",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
-            "name": "rank",
-            "req": False,
+            "name": "season",
             "type": "`$STRING`",
-            "index$": 3,
           },
           {
-            "active": True,
-            "name": "rank_num",
-            "req": False,
-            "type": "`$NUMBER`",
-            "index$": 4,
+            "name": "season_week",
+            "type": "`$INTEGER`",
           },
           {
-            "active": True,
             "name": "system",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 5,
           },
           {
-            "active": True,
-            "name": "title",
-            "req": False,
+            "name": "weekday",
             "type": "`$STRING`",
-            "index$": 6,
           },
         ],
         "name": "calendar",
@@ -82,48 +88,77 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
+                      "example": "en",
+                      "kind": "param",
+                      "name": "locale",
+                      "orig": "locale",
+                      "reqd": True,
+                      "type": "`$STRING`",
+                    },
+                  ],
+                },
+                "kind": "http",
+                "method": "GET",
+                "orig": "/api/v0/{locale}/calendars",
+                "parts": [
+                  "api",
+                  "v0",
+                  "{locale}",
+                  "calendars",
+                ],
+                "select": {
+                  "exist": [
+                    "locale",
+                  ],
+                },
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+              },
+            ],
+          },
+          "load": {
+            "input": "data",
+            "name": "load",
+            "points": [
+              {
+                "args": {
+                  "params": [
+                    {
                       "example": "default",
                       "kind": "param",
                       "name": "calendar",
                       "orig": "calendar",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                     {
-                      "active": True,
                       "example": 25,
                       "kind": "param",
                       "name": "day",
                       "orig": "day",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "index$": 1,
                     },
                     {
-                      "active": True,
                       "example": 12,
                       "kind": "param",
                       "name": "month",
                       "orig": "month",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "index$": 2,
                     },
                     {
-                      "active": True,
                       "example": 2024,
                       "kind": "param",
                       "name": "year",
                       "orig": "year",
                       "reqd": True,
                       "type": "`$INTEGER`",
-                      "index$": 3,
                     },
                   ],
                 },
@@ -150,48 +185,10 @@ def make_config():
                 },
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.celebrations`",
-                },
-                "index$": 0,
-              },
-              {
-                "active": True,
-                "args": {
-                  "params": [
-                    {
-                      "active": True,
-                      "example": "en",
-                      "kind": "param",
-                      "name": "locale",
-                      "orig": "locale",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                      "index$": 0,
-                    },
-                  ],
-                },
-                "kind": "http",
-                "method": "GET",
-                "orig": "/api/v0/{locale}/calendars",
-                "parts": [
-                  "api",
-                  "v0",
-                  "{locale}",
-                  "calendars",
-                ],
-                "select": {
-                  "exist": [
-                    "locale",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 1,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {

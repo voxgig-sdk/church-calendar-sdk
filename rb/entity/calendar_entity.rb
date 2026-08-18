@@ -171,6 +171,34 @@ class CalendarEntity
   end
 
   
+  # Load a single Calendar.
+  #
+  # @param reqmatch [CalendarLoadMatch, Hash, nil] match criteria (id/query fields);
+  #   optional — an entity with no id-like key loads with no match (nil is treated
+  #   as an empty match, so client.Calendar.load works with no args).
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Calendar, Hash] the loaded Calendar; raises ChurchCalendarError on failure
+  def load(reqmatch = nil, ctrl = nil)
+    utility = @_utility
+    ctx = utility.make_context.call({
+      "opname" => "load",
+      "ctrl" => ctrl,
+      "match" => @_match,
+      "data" => @_data,
+      "reqmatch" => reqmatch,
+    }, @_entctx)
+
+    _run_op(ctx) do
+      if ctx.result
+        @_match = ctx.result.resmatch if ctx.result.resmatch
+        if ctx.result.resdata
+          @_data = ChurchCalendarHelpers.to_map(VoxgigStruct.clone(ctx.result.resdata)) || {}
+        end
+      end
+    end
+  end
+
+
 
   
   # List Calendar items matching the given filter.

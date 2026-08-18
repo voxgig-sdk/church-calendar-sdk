@@ -15,22 +15,28 @@ declare(strict_types=1);
 /** Calendar entity data model. */
 class Calendar
 {
-    public ?string $colour = null;
+    public ?array $celebrations = null;
+    public ?string $date = null;
     public ?string $description = null;
     public ?string $name = null;
-    public ?string $rank = null;
-    public ?float $rank_num = null;
+    public ?string $season = null;
+    public ?int $season_week = null;
     public ?string $system = null;
-    public ?string $title = null;
+    public ?string $weekday = null;
+}
+
+/** Request payload for Calendar#load. */
+class CalendarLoadMatch
+{
+    public string $calendar;
+    public int $day;
+    public int $month;
+    public int $year;
 }
 
 /** Request payload for Calendar#list. */
 class CalendarListMatch
 {
-    public ?string $calendar = null;
-    public ?int $day = null;
-    public ?int $month = null;
-    public ?int $year = null;
-    public ?string $locale = null;
+    public string $locale;
 }
 

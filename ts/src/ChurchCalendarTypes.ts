@@ -6,20 +6,24 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Calendar {
-  colour?: string
+  celebrations?: any[]
+  date?: string
   description?: string
   name?: string
-  rank?: string
-  rank_num?: number
+  season?: string
+  season_week?: number
   system?: string
-  title?: string
+  weekday?: string
+}
+
+export interface CalendarLoadMatch {
+  calendar: string
+  day: number
+  month: number
+  year: number
 }
 
 export interface CalendarListMatch {
-  calendar?: string
-  day?: number
-  month?: number
-  year?: number
-  locale?: string
+  locale: string
 }
 

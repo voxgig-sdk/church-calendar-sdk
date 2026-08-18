@@ -17,7 +17,7 @@ class CalendarDirectTest < Minitest::Test
       return
     end
     if setup[:live]
-      ["calendar01", "day01", "month01", "year01"].each do |_live_key|
+      ["locale01"].each do |_live_key|
         if setup[:idmap][_live_key].nil?
           skip "live test needs #{_live_key} via *_ENTID env var (synthetic IDs only)"
           return
@@ -28,28 +28,13 @@ class CalendarDirectTest < Minitest::Test
 
     params = {}
     if setup[:live]
-      params["calendar"] = setup[:idmap]["calendar01"]
+      params["locale"] = setup[:idmap]["locale01"]
     else
-      params["calendar"] = "direct01"
-    end
-    if setup[:live]
-      params["day"] = setup[:idmap]["day01"]
-    else
-      params["day"] = "direct01"
-    end
-    if setup[:live]
-      params["month"] = setup[:idmap]["month01"]
-    else
-      params["month"] = "direct01"
-    end
-    if setup[:live]
-      params["year"] = setup[:idmap]["year01"]
-    else
-      params["year"] = "direct01"
+      params["locale"] = "direct01"
     end
 
     result = client.direct({
-      "path" => "api/v0/en/calendars/{calendar}/{year}/{month}/{day}",
+      "path" => "api/v0/{locale}/calendars",
       "method" => "GET",
       "params" => params,
     })
@@ -76,6 +61,64 @@ class CalendarDirectTest < Minitest::Test
       assert_equal 200, Helpers.to_int(result["status"])
       assert result["data"].is_a?(Array)
       assert_equal 2, result["data"].length
+      assert_equal 1, setup[:calls].length
+    end
+  end
+
+  def test_direct_load_calendar
+    setup = calendar_direct_setup({ "id" => "direct01" })
+    _should_skip, _reason = Runner.is_control_skipped("direct", "direct-load-calendar", setup[:live] ? "live" : "unit")
+    if _should_skip
+      skip(_reason || "skipped via sdk-test-control.json")
+      return
+    end
+    client = setup[:client]
+
+    params = {}
+    query = {}
+    if setup[:live]
+      params["calendar"] = "default"
+      params["day"] = 25
+      params["month"] = 12
+      params["year"] = 2024
+    else
+      params["calendar"] = "direct01"
+      params["day"] = "direct02"
+      params["month"] = "direct03"
+      params["year"] = "direct04"
+    end
+
+    result = client.direct({
+      "path" => "api/v0/en/calendars/{calendar}/{year}/{month}/{day}",
+      "method" => "GET",
+      "params" => params,
+      "query" => query,
+    })
+    if setup[:live]
+      # Live mode is lenient: synthetic IDs frequently 4xx. Skip rather
+      # than fail when the load endpoint isn't reachable with the IDs
+      # we can construct from setup.idmap.
+      if !result["err"].nil?
+        skip("load call failed (likely synthetic IDs against live API): #{result["err"]}")
+        return
+      end
+      unless result["ok"]
+        skip("load call not ok (likely synthetic IDs against live API)")
+        return
+      end
+      status = Helpers.to_int(result["status"])
+      if status < 200 || status >= 300
+        skip("expected 2xx status, got #{status}")
+        return
+      end
+    else
+      assert_nil result["err"]
+      assert result["ok"]
+      assert_equal 200, Helpers.to_int(result["status"])
+      assert !result["data"].nil?
+      if result["data"].is_a?(Hash)
+        assert_equal "direct01", result["data"]["id"]
+      end
       assert_equal 1, setup[:calls].length
     end
   end

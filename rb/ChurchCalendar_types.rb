@@ -10,7 +10,10 @@
 
 # Calendar entity data model.
 #
-# @!attribute [rw] colour
+# @!attribute [rw] celebrations
+#   @return [Array, nil]
+#
+# @!attribute [rw] date
 #   @return [String, nil]
 #
 # @!attribute [rw] description
@@ -19,49 +22,55 @@
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] rank
+# @!attribute [rw] season
 #   @return [String, nil]
 #
-# @!attribute [rw] rank_num
-#   @return [Float, nil]
+# @!attribute [rw] season_week
+#   @return [Integer, nil]
 #
 # @!attribute [rw] system
 #   @return [String, nil]
 #
-# @!attribute [rw] title
+# @!attribute [rw] weekday
 #   @return [String, nil]
 Calendar = Struct.new(
-  :colour,
+  :celebrations,
+  :date,
   :description,
   :name,
-  :rank,
-  :rank_num,
+  :season,
+  :season_week,
   :system,
-  :title,
+  :weekday,
+  keyword_init: true
+)
+
+# Request payload for Calendar#load.
+#
+# @!attribute [rw] calendar
+#   @return [String]
+#
+# @!attribute [rw] day
+#   @return [Integer]
+#
+# @!attribute [rw] month
+#   @return [Integer]
+#
+# @!attribute [rw] year
+#   @return [Integer]
+CalendarLoadMatch = Struct.new(
+  :calendar,
+  :day,
+  :month,
+  :year,
   keyword_init: true
 )
 
 # Request payload for Calendar#list.
 #
-# @!attribute [rw] calendar
-#   @return [String, nil]
-#
-# @!attribute [rw] day
-#   @return [Integer, nil]
-#
-# @!attribute [rw] month
-#   @return [Integer, nil]
-#
-# @!attribute [rw] year
-#   @return [Integer, nil]
-#
 # @!attribute [rw] locale
-#   @return [String, nil]
+#   @return [String]
 CalendarListMatch = Struct.new(
-  :calendar,
-  :day,
-  :month,
-  :year,
   :locale,
   keyword_init: true
 )

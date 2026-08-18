@@ -5,7 +5,7 @@
 The Python SDK for the ChurchCalendar API — an entity-oriented client following Pythonic conventions.
 
 The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Calendar()` — each
-carrying a small, uniform set of operations (`list`) instead of raw URL
+carrying a small, uniform set of operations (`list`, `load`) instead of raw URL
 paths and query strings. You work with named resources and verbs, which
 keeps the cognitive load low.
 
@@ -43,11 +43,24 @@ error — iterate it directly.
 
 ```python
 try:
-    calendars = client.Calendar().list()
+    calendars = client.Calendar().list({"locale": "example"})
     for calendar in calendars:
         print(calendar)
 except Exception as err:
     print(f"list failed: {err}")
+```
+
+### 3. Load a calendar
+
+Calendar is nested under calendar, so provide the `calendar`.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
+
+```python
+try:
+    calendar = client.Calendar().load({"calendar": "example_calendar", "day": 1, "month": 1, "year": 1})
+    print(calendar)
+except Exception as err:
+    print(f"load failed: {err}")
 ```
 
 
@@ -211,6 +224,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
 | `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
@@ -243,17 +257,18 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `colour` |  |
+| `celebrations` |  |
+| `date` |  |
 | `description` |  |
 | `name` |  |
-| `rank` |  |
-| `rank_num` |  |
+| `season` |  |
+| `season_week` |  |
 | `system` |  |
-| `title` |  |
+| `weekday` |  |
 
-Operations: List.
+Operations: List, Load.
 
-API path: `/api/v0/en/calendars/{calendar}/{year}/{month}/{day}`
+API path: `/api/v0/{locale}/calendars`
 
 
 
@@ -269,23 +284,31 @@ Create an instance: `calendar = client.Calendar()`
 | Method | Description |
 | --- | --- |
 | `list()` | List entities, optionally matching the given criteria. |
+| `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `colour` | `str` |  |
+| `celebrations` | `list` |  |
+| `date` | `str` |  |
 | `description` | `str` |  |
 | `name` | `str` |  |
-| `rank` | `str` |  |
-| `rank_num` | `float` |  |
+| `season` | `str` |  |
+| `season_week` | `int` |  |
 | `system` | `str` |  |
-| `title` | `str` |  |
+| `weekday` | `str` |  |
+
+#### Example: Load
+
+```python
+calendar = client.Calendar().load({"calendar": "calendar", "day": 1, "month": 1, "year": 1})
+```
 
 #### Example: List
 
 ```python
-calendars = client.Calendar().list()
+calendars = client.Calendar().list({"locale": "example"})
 ```
 
 

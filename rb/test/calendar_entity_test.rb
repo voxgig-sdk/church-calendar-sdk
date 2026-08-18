@@ -33,7 +33,7 @@ class CalendarEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = ChurchCalendarConfig.make_config
+    cfg = ChurchCalendarConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = ChurchCalendarSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []
@@ -52,7 +52,7 @@ class CalendarEntityTest < Minitest::Test
     setup = calendar_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["list"].each do |_op|
+    ["list", "load"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "calendar." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -84,6 +84,11 @@ class CalendarEntityTest < Minitest::Test
     calendar_ref01_list_result = calendar_ref01_ent.list(calendar_ref01_match, nil)
     assert calendar_ref01_list_result.is_a?(Array)
 
+    # LOAD
+    calendar_ref01_match_dt0 = {}
+    calendar_ref01_data_dt0_loaded = calendar_ref01_ent.load(calendar_ref01_match_dt0, nil)
+    assert !calendar_ref01_data_dt0_loaded.nil?
+
   end
 end
 
@@ -101,7 +106,7 @@ def calendar_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["calendar01", "calendar02", "calendar03", "v001", "v002", "v003", "locale01"],
+    ["calendar01", "calendar02", "calendar03", "v001", "v002", "v003", "locale01", "month01", "year01"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",

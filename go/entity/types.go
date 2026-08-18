@@ -14,22 +14,27 @@ import (
 
 // Calendar is the typed data model for the calendar entity.
 type Calendar struct {
-	Colour *string `json:"colour,omitempty"`
+	Celebrations *[]any `json:"celebrations,omitempty"`
+	Date *string `json:"date,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Name *string `json:"name,omitempty"`
-	Rank *string `json:"rank,omitempty"`
-	RankNum *float64 `json:"rank_num,omitempty"`
+	Season *string `json:"season,omitempty"`
+	SeasonWeek *int `json:"season_week,omitempty"`
 	System *string `json:"system,omitempty"`
-	Title *string `json:"title,omitempty"`
+	Weekday *string `json:"weekday,omitempty"`
+}
+
+// CalendarLoadMatch is the typed request payload for Calendar.LoadTyped.
+type CalendarLoadMatch struct {
+	Calendar string `json:"calendar"`
+	Day int `json:"day"`
+	Month int `json:"month"`
+	Year int `json:"year"`
 }
 
 // CalendarListMatch is the typed request payload for Calendar.ListTyped.
 type CalendarListMatch struct {
-	Calendar *string `json:"calendar,omitempty"`
-	Day *int `json:"day,omitempty"`
-	Month *int `json:"month,omitempty"`
-	Year *int `json:"year,omitempty"`
-	Locale *string `json:"locale,omitempty"`
+	Locale string `json:"locale"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

@@ -5,7 +5,7 @@
 The TypeScript SDK for the ChurchCalendar API — a type-safe, entity-oriented client with full async/await support.
 
 The API is exposed as capitalised, semantic **Entities** — e.g.
-`client.Calendar()` — each with a small set of operations (`list`)
+`client.Calendar()` — each with a small set of operations (`list`, `load`)
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
@@ -40,10 +40,29 @@ resolves to entities, not raw records. Iterate them directly, and call
 `.data()` on one for the record it holds:
 
 ```ts
-const calendars = await client.Calendar().list()
+const calendars = await client.Calendar().list({ locale: "example" })
 
 for (const calendar of calendars) {
   console.log(calendar)
+}
+```
+
+### 3. Load a calendar
+
+Calendar is nested under calendar, so provide the `calendar`.
+`load()` returns the entity directly and throws on failure:
+
+```ts
+try {
+  const calendar = await client.Calendar().load({
+    calendar: 'example_calendar',
+    day: 1,
+    month: 1,
+    year: 1,
+  })
+  console.log(calendar)
+} catch (err) {
+  console.error('load failed:', err)
 }
 ```
 
@@ -234,6 +253,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
 | `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
 | `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
 | `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
@@ -246,6 +266,7 @@ All entities share the same interface.
 Entity operations resolve to the entity data directly — there is no
 result envelope:
 
+- `load` resolves to a single entity object.
 - `list` resolves to an **array** of entity objects (iterate it directly;
   there is no `.data` and no `.ok`).
 
@@ -287,17 +308,18 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `colour` |  |
+| `celebrations` |  |
+| `date` |  |
 | `description` |  |
 | `name` |  |
-| `rank` |  |
-| `rank_num` |  |
+| `season` |  |
+| `season_week` |  |
 | `system` |  |
-| `title` |  |
+| `weekday` |  |
 
-Operations: list.
+Operations: list, load.
 
-API path: `/api/v0/en/calendars/{calendar}/{year}/{month}/{day}`
+API path: `/api/v0/{locale}/calendars`
 
 
 
@@ -313,23 +335,31 @@ Create an instance: `const calendar = client.Calendar()`
 | Method | Description |
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
+| `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `colour` | `string` |  |
+| `celebrations` | `any[]` |  |
+| `date` | `string` |  |
 | `description` | `string` |  |
 | `name` | `string` |  |
-| `rank` | `string` |  |
-| `rank_num` | `number` |  |
+| `season` | `string` |  |
+| `season_week` | `number` |  |
 | `system` | `string` |  |
-| `title` | `string` |  |
+| `weekday` | `string` |  |
+
+#### Example: Load
+
+```ts
+const calendar = await client.Calendar().load({ calendar: 'calendar', day: 1, month: 1, year: 1 })
+```
 
 #### Example: List
 
 ```ts
-const calendars = await client.Calendar().list()
+const calendars = await client.Calendar().list({ locale: "example" })
 ```
 
 

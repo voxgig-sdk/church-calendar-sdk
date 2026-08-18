@@ -40,7 +40,7 @@ class CalendarEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = ChurchCalendarConfig::make_config();
+        $cfg = ChurchCalendarConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = ChurchCalendarSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
@@ -62,7 +62,7 @@ class CalendarEntityTest extends TestCase
         $setup = calendar_basic_setup(null);
         // Per-op sdk-test-control.json skip.
         $_live = !empty($setup["live"]);
-        foreach (["list"] as $_op) {
+        foreach (["list", "load"] as $_op) {
             [$_shouldSkip, $_reason] = Runner::is_control_skipped("entityOp", "calendar." . $_op, $_live ? "live" : "unit");
             if ($_shouldSkip) {
                 $this->markTestSkipped($_reason ?? "skipped via sdk-test-control.json");
@@ -94,6 +94,11 @@ class CalendarEntityTest extends TestCase
         $calendar_ref01_list_result = $calendar_ref01_ent->list($calendar_ref01_match, null);
         $this->assertIsArray($calendar_ref01_list_result);
 
+        // LOAD
+        $calendar_ref01_match_dt0 = [];
+        $calendar_ref01_data_dt0_loaded = $calendar_ref01_ent->load($calendar_ref01_match_dt0, null);
+        $this->assertNotNull($calendar_ref01_data_dt0_loaded);
+
     }
 }
 
@@ -112,7 +117,7 @@ function calendar_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["calendar01", "calendar02", "calendar03", "v001", "v002", "v003", "locale01"] as $k) {
+    foreach (["calendar01", "calendar02", "calendar03", "v001", "v002", "v003", "locale01", "month01", "year01"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

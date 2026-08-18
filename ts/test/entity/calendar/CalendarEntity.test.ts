@@ -39,7 +39,7 @@ describe('CalendarEntity', async () => {
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.CHURCH_CALENDAR_TEST_LIVE
-    for (const op of ['list']) {
+    for (const op of ['list', 'load']) {
       if (maybeSkipControl(t, 'entityOp', 'calendar.' + op, live)) return
     }
 
@@ -65,6 +65,7 @@ describe('CalendarEntity', async () => {
     calendar_ref01_match['locale'] = setup.idmap['locale01']
 
     const calendar_ref01_list = (await calendar_ref01_ent.list(calendar_ref01_match)).map((e: any) => e.data())
+
 
 
   })

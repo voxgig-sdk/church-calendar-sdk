@@ -116,13 +116,14 @@ const calendar = client.Calendar()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `colour` | `string` | No |  |
+| `celebrations` | `any[]` | No |  |
+| `date` | `string` | No |  |
 | `description` | `string` | No |  |
 | `name` | `string` | No |  |
-| `rank` | `string` | No |  |
-| `rank_num` | `number` | No |  |
+| `season` | `string` | No |  |
+| `season_week` | `number` | No |  |
 | `system` | `string` | No |  |
-| `title` | `string` | No |  |
+| `weekday` | `string` | No |  |
 
 ### Operations
 
@@ -131,7 +132,15 @@ const calendar = client.Calendar()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Calendar().list()
+const results = await client.Calendar().list({ locale: "example" })
+```
+
+#### `load(match: object, ctrl?: object)`
+
+Load a single entity matching the given criteria.
+
+```ts
+const result = await client.Calendar().load({ calendar: 'calendar', day: 1, month: 1, year: 1 })
 ```
 
 ### Common Methods

@@ -6,7 +6,12 @@ main: kit: entity: calendar: {
 
   fields: [
     {
-      name: "colour"
+      name: "celebrations"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "date"
       req: false
       type: "`$STRING`"
     }
@@ -21,14 +26,14 @@ main: kit: entity: calendar: {
       type: "`$STRING`"
     }
     {
-      name: "rank"
+      name: "season"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "rank_num"
+      name: "season_week"
       req: false
-      type: "`$NUMBER`"
+      type: "`$INTEGER`"
     }
     {
       name: "system"
@@ -36,7 +41,7 @@ main: kit: entity: calendar: {
       type: "`$STRING`"
     }
     {
-      name: "title"
+      name: "weekday"
       req: false
       type: "`$STRING`"
     }
@@ -46,6 +51,42 @@ main: kit: entity: calendar: {
   op: {
     list: {
       name: "list"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "en"
+                kind: "param"
+                name: "locale"
+                orig: "locale"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/v0/{locale}/calendars"
+          parts: [
+            "api"
+            "v0"
+            "{locale}"
+            "calendars"
+          ]
+          select: {
+            exist: [
+              "locale"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
       points: [
         {
           args: {
@@ -102,37 +143,6 @@ main: kit: entity: calendar: {
               "day"
               "month"
               "year"
-            ]
-          }
-          transform: {
-            req: "`reqdata`"
-            res: "`body.celebrations`"
-          }
-        }
-        {
-          args: {
-            params: [
-              {
-                example: "en"
-                kind: "param"
-                name: "locale"
-                orig: "locale"
-                reqd: true
-                type: "`$STRING`"
-              }
-            ]
-          }
-          method: "GET"
-          orig: "/api/v0/{locale}/calendars"
-          parts: [
-            "api"
-            "v0"
-            "{locale}"
-            "calendars"
-          ]
-          select: {
-            exist: [
-              "locale"
             ]
           }
           transform: {

@@ -35,19 +35,18 @@ describe('CalendarDirect', async () => {
   })
 
 
-  test('direct-list-calendar', async (t: any) => {
-    const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])
-    if (maybeSkipControl(t, 'direct', 'direct-list-calendar', setup.live)) return
-    if (skipIfMissingIds(t, setup, ["calendar01","day01","month01","year01"])) return
+  test('direct-load-calendar', async (t: any) => {
+    const setup = directSetup({ id: 'direct01' })
+    if (maybeSkipControl(t, 'direct', 'direct-load-calendar', setup.live)) return
     const { client, calls } = setup
 
     const params: any = {}
     const query: any = {}
     if (setup.live) {
-      params.calendar = setup.idmap['calendar01']
-      params.day = setup.idmap['day01']
-      params.month = setup.idmap['month01']
-      params.year = setup.idmap['year01']
+      params.calendar = "default"
+      params.day = 25
+      params.month = 12
+      params.year = 2024
     } else {
       params.calendar = 'direct01'
       params.day = 'direct02'
@@ -57,6 +56,48 @@ describe('CalendarDirect', async () => {
 
     const result: any = await client.direct({
       path: 'api/v0/en/calendars/{calendar}/{year}/{month}/{day}',
+      method: 'GET',
+      params,
+      query,
+    })
+
+    if (setup.live) {
+      // Live mode is lenient: synthetic IDs frequently 4xx. Skip rather
+      // than fail when the load endpoint isn't reachable with the IDs we
+      // can construct from setup.idmap.
+      if (!result.ok || result.status < 200 || result.status >= 300) {
+        return
+      }
+    } else {
+      assert(result.ok === true)
+      assert(result.status === 200)
+      assert(null != result.data)
+      assert(result.data.id === 'direct01')
+      assert(calls.length === 1)
+      assert(calls[0].init.method === 'GET')
+      assert(calls[0].url.includes('direct01'))
+      assert(calls[0].url.includes('direct02'))
+      assert(calls[0].url.includes('direct03'))
+      assert(calls[0].url.includes('direct04'))
+    }
+  })
+
+  test('direct-list-calendar', async (t: any) => {
+    const setup = directSetup([{ id: 'direct01' }, { id: 'direct02' }])
+    if (maybeSkipControl(t, 'direct', 'direct-list-calendar', setup.live)) return
+    if (skipIfMissingIds(t, setup, ["locale01"])) return
+    const { client, calls } = setup
+
+    const params: any = {}
+    const query: any = {}
+    if (setup.live) {
+      params.locale = setup.idmap['locale01']
+    } else {
+      params.locale = 'direct01'
+    }
+
+    const result: any = await client.direct({
+      path: 'api/v0/{locale}/calendars',
       method: 'GET',
       params,
       query,
@@ -83,9 +124,6 @@ describe('CalendarDirect', async () => {
       assert(calls.length === 1)
       assert(calls[0].init.method === 'GET')
       assert(calls[0].url.includes('direct01'))
-      assert(calls[0].url.includes('direct02'))
-      assert(calls[0].url.includes('direct03'))
-      assert(calls[0].url.includes('direct04'))
     }
   })
 

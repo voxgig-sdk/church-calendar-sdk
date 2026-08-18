@@ -23,6 +23,7 @@ build = {
   modules = {
     ["church-calendar_sdk"] = "church-calendar_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }

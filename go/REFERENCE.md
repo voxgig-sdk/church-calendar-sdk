@@ -98,13 +98,14 @@ fmt.Println(calendar.GetName()) // "calendar"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `colour` | `string` | No |  |
+| `celebrations` | `[]any` | No |  |
+| `date` | `string` | No |  |
 | `description` | `string` | No |  |
 | `name` | `string` | No |  |
-| `rank` | `string` | No |  |
-| `rank_num` | `float64` | No |  |
+| `season` | `string` | No |  |
+| `season_week` | `int` | No |  |
 | `system` | `string` | No |  |
-| `title` | `string` | No |  |
+| `weekday` | `string` | No |  |
 
 ### Operations
 
@@ -118,6 +119,18 @@ if err != nil {
     panic(err)
 }
 fmt.Println(results)
+```
+
+#### `Load(reqmatch, ctrl map[string]any) (any, error)`
+
+Load a single entity matching the given criteria.
+
+```go
+result, err := client.Calendar(nil).Load(map[string]any{"calendar": "calendar", "day": 1, "month": 1, "year": 1}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

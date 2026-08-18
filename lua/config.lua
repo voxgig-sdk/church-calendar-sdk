@@ -1,5 +1,8 @@
 -- ChurchCalendar SDK configuration
 
+-- Build a fresh, fully materialised config table. Every call rebuilds the
+-- whole structure, so prefer require("config_shared") unless you need a
+-- private copy you intend to mutate.
 local function make_config()
   return {
     main = {
@@ -25,53 +28,36 @@ local function make_config()
       ["calendar"] = {
         ["fields"] = {
           {
-            ["active"] = true,
-            ["name"] = "colour",
-            ["req"] = false,
-            ["type"] = "`$STRING`",
-            ["index$"] = 0,
+            ["name"] = "celebrations",
+            ["type"] = "`$ARRAY`",
           },
           {
-            ["active"] = true,
+            ["name"] = "date",
+            ["type"] = "`$STRING`",
+          },
+          {
             ["name"] = "description",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "name",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
-            ["name"] = "rank",
-            ["req"] = false,
+            ["name"] = "season",
             ["type"] = "`$STRING`",
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
-            ["name"] = "rank_num",
-            ["req"] = false,
-            ["type"] = "`$NUMBER`",
-            ["index$"] = 4,
+            ["name"] = "season_week",
+            ["type"] = "`$INTEGER`",
           },
           {
-            ["active"] = true,
             ["name"] = "system",
-            ["req"] = false,
             ["type"] = "`$STRING`",
-            ["index$"] = 5,
           },
           {
-            ["active"] = true,
-            ["name"] = "title",
-            ["req"] = false,
+            ["name"] = "weekday",
             ["type"] = "`$STRING`",
-            ["index$"] = 6,
           },
         },
         ["name"] = "calendar",
@@ -81,48 +67,77 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
+                      ["example"] = "en",
+                      ["kind"] = "param",
+                      ["name"] = "locale",
+                      ["orig"] = "locale",
+                      ["reqd"] = true,
+                      ["type"] = "`$STRING`",
+                    },
+                  },
+                },
+                ["kind"] = "http",
+                ["method"] = "GET",
+                ["orig"] = "/api/v0/{locale}/calendars",
+                ["parts"] = {
+                  "api",
+                  "v0",
+                  "{locale}",
+                  "calendars",
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "locale",
+                  },
+                },
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+              },
+            },
+          },
+          ["load"] = {
+            ["input"] = "data",
+            ["name"] = "load",
+            ["points"] = {
+              {
+                ["args"] = {
+                  ["params"] = {
+                    {
                       ["example"] = "default",
                       ["kind"] = "param",
                       ["name"] = "calendar",
                       ["orig"] = "calendar",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                     {
-                      ["active"] = true,
                       ["example"] = 25,
                       ["kind"] = "param",
                       ["name"] = "day",
                       ["orig"] = "day",
                       ["reqd"] = true,
                       ["type"] = "`$INTEGER`",
-                      ["index$"] = 1,
                     },
                     {
-                      ["active"] = true,
                       ["example"] = 12,
                       ["kind"] = "param",
                       ["name"] = "month",
                       ["orig"] = "month",
                       ["reqd"] = true,
                       ["type"] = "`$INTEGER`",
-                      ["index$"] = 2,
                     },
                     {
-                      ["active"] = true,
                       ["example"] = 2024,
                       ["kind"] = "param",
                       ["name"] = "year",
                       ["orig"] = "year",
                       ["reqd"] = true,
                       ["type"] = "`$INTEGER`",
-                      ["index$"] = 3,
                     },
                   },
                 },
@@ -149,48 +164,10 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body.celebrations`",
-                },
-                ["index$"] = 0,
-              },
-              {
-                ["active"] = true,
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["active"] = true,
-                      ["example"] = "en",
-                      ["kind"] = "param",
-                      ["name"] = "locale",
-                      ["orig"] = "locale",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                      ["index$"] = 0,
-                    },
-                  },
-                },
-                ["kind"] = "http",
-                ["method"] = "GET",
-                ["orig"] = "/api/v0/{locale}/calendars",
-                ["parts"] = {
-                  "api",
-                  "v0",
-                  "{locale}",
-                  "calendars",
-                },
-                ["select"] = {
-                  ["exist"] = {
-                    "locale",
-                  },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 1,
               },
             },
-            ["key$"] = "list",
           },
         },
         ["relations"] = {

@@ -21,6 +21,31 @@ main: kit: flow: BasicCalendarFlow:
         }
       ]
     }
+
+    {
+      input: {
+        ref: "calendar_ref01",
+        srcdatavar: "calendar_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        calendar: "calendar01",
+        id: "calendar01",
+        month: "month01",
+        year: "year01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-calendar_ref01"
+          }
+        }
+      ]
+    }
   ],
   "key$": "BasicCalendarFlow"
 }

@@ -28,7 +28,7 @@ class ChurchCalendarSDK
     utility = ChurchCalendarUtility.new
     @_utility = utility
 
-    config = ChurchCalendarConfig.make_config
+    config = ChurchCalendarConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

@@ -4,7 +4,7 @@
 
 The Lua SDK for the ChurchCalendar API — an entity-oriented client using Lua conventions.
 
-It exposes the API as capitalised, semantic **Entities** — e.g. `client:Calendar()` — each with the same small set of operations (`list`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+It exposes the API as capitalised, semantic **Entities** — e.g. `client:Calendar()` — each with the same small set of operations (`list`, `load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -43,8 +43,18 @@ local calendars, err = client:Calendar():list()
 if err then error(err) end
 
 for _, item in ipairs(calendars) do
-  print(item["colour"])
+  print(item["date"])
 end
+```
+
+### 3. Load a calendar
+
+Calendar is nested under calendar, so provide the `calendar`.
+
+```lua
+local calendar, err = client:Calendar():load({ calendar = "example_calendar", day = 1, month = 1, year = 1 })
+if err then error(err) end
+print(calendar)
 ```
 
 
@@ -199,6 +209,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
+| `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria. |
 | `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
@@ -214,13 +225,14 @@ data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
+| `load` | the entity record (a `table`) |
 | `list` | an array (`table`) of entity records |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local calendar, err = client:Calendar():list()
+    local calendar, err = client:Calendar():load()
     if err then error(err) end
-    -- calendar is the record list
+    -- calendar is the loaded record
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -231,17 +243,18 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `colour` |  |
+| `celebrations` |  |
+| `date` |  |
 | `description` |  |
 | `name` |  |
-| `rank` |  |
-| `rank_num` |  |
+| `season` |  |
+| `season_week` |  |
 | `system` |  |
-| `title` |  |
+| `weekday` |  |
 
-Operations: List.
+Operations: List, Load.
 
-API path: `/api/v0/en/calendars/{calendar}/{year}/{month}/{day}`
+API path: `/api/v0/{locale}/calendars`
 
 
 
@@ -257,18 +270,26 @@ Create an instance: `local calendar = client:Calendar(nil)`
 | Method | Description |
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
+| `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `colour` | `string` |  |
+| `celebrations` | `table` |  |
+| `date` | `string` |  |
 | `description` | `string` |  |
 | `name` | `string` |  |
-| `rank` | `string` |  |
-| `rank_num` | `number` |  |
+| `season` | `string` |  |
+| `season_week` | `number` |  |
 | `system` | `string` |  |
-| `title` | `string` |  |
+| `weekday` | `string` |  |
+
+#### Example: Load
+
+```lua
+local calendar, err = client:Calendar():load({ calendar = "calendar", day = 1, month = 1, year = 1 })
+```
 
 #### Example: List
 
