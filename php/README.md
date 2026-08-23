@@ -262,14 +262,14 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `celebrations` |  |
-| `date` |  |
-| `description` |  |
-| `name` |  |
-| `season` |  |
-| `season_week` |  |
-| `system` |  |
-| `weekday` |  |
+| `celebrations` | List of liturgical celebrations for this date |
+| `date` | The requested date |
+| `description` | Description of the calendar system |
+| `name` | Human-readable name of the calendar |
+| `season` | Liturgical season |
+| `season_week` | Week number within the liturgical season |
+| `system` | Calendar system identifier |
+| `weekday` | Day of the week |
 
 Operations: List, Load.
 
@@ -295,14 +295,14 @@ Create an instance: `$calendar = $client->Calendar();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `celebrations` | `array` |  |
-| `date` | `string` |  |
-| `description` | `string` |  |
-| `name` | `string` |  |
-| `season` | `string` |  |
-| `season_week` | `int` |  |
-| `system` | `string` |  |
-| `weekday` | `string` |  |
+| `celebrations` | `array` | List of liturgical celebrations for this date |
+| `date` | `string` | The requested date |
+| `description` | `string` | Description of the calendar system |
+| `name` | `string` | Human-readable name of the calendar |
+| `season` | `string` | Liturgical season |
+| `season_week` | `int` | Week number within the liturgical season |
+| `system` | `string` | Calendar system identifier |
+| `weekday` | `string` | Day of the week |
 
 #### Example: Load
 

@@ -257,14 +257,14 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `celebrations` |  |
-| `date` |  |
-| `description` |  |
-| `name` |  |
-| `season` |  |
-| `season_week` |  |
-| `system` |  |
-| `weekday` |  |
+| `celebrations` | List of liturgical celebrations for this date |
+| `date` | The requested date |
+| `description` | Description of the calendar system |
+| `name` | Human-readable name of the calendar |
+| `season` | Liturgical season |
+| `season_week` | Week number within the liturgical season |
+| `system` | Calendar system identifier |
+| `weekday` | Day of the week |
 
 Operations: List, Load.
 
@@ -290,14 +290,14 @@ Create an instance: `calendar = client.Calendar()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `celebrations` | `list` |  |
-| `date` | `str` |  |
-| `description` | `str` |  |
-| `name` | `str` |  |
-| `season` | `str` |  |
-| `season_week` | `int` |  |
-| `system` | `str` |  |
-| `weekday` | `str` |  |
+| `celebrations` | `list` | List of liturgical celebrations for this date |
+| `date` | `str` | The requested date |
+| `description` | `str` | Description of the calendar system |
+| `name` | `str` | Human-readable name of the calendar |
+| `season` | `str` | Liturgical season |
+| `season_week` | `int` | Week number within the liturgical season |
+| `system` | `str` | Calendar system identifier |
+| `weekday` | `str` | Day of the week |
 
 #### Example: Load
 

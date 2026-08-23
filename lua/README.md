@@ -243,14 +243,14 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `celebrations` |  |
-| `date` |  |
-| `description` |  |
-| `name` |  |
-| `season` |  |
-| `season_week` |  |
-| `system` |  |
-| `weekday` |  |
+| `celebrations` | List of liturgical celebrations for this date |
+| `date` | The requested date |
+| `description` | Description of the calendar system |
+| `name` | Human-readable name of the calendar |
+| `season` | Liturgical season |
+| `season_week` | Week number within the liturgical season |
+| `system` | Calendar system identifier |
+| `weekday` | Day of the week |
 
 Operations: List, Load.
 
@@ -276,14 +276,14 @@ Create an instance: `local calendar = client:Calendar(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `celebrations` | `table` |  |
-| `date` | `string` |  |
-| `description` | `string` |  |
-| `name` | `string` |  |
-| `season` | `string` |  |
-| `season_week` | `number` |  |
-| `system` | `string` |  |
-| `weekday` | `string` |  |
+| `celebrations` | `table` | List of liturgical celebrations for this date |
+| `date` | `string` | The requested date |
+| `description` | `string` | Description of the calendar system |
+| `name` | `string` | Human-readable name of the calendar |
+| `season` | `string` | Liturgical season |
+| `season_week` | `number` | Week number within the liturgical season |
+| `system` | `string` | Calendar system identifier |
+| `weekday` | `string` | Day of the week |
 
 #### Example: Load
 

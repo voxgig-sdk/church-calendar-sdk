@@ -6,7 +6,7 @@ The Golang SDK for the ChurchCalendar API — an entity-oriented client using st
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Calendar(nil)` — each with the same small set of operations (`List`, `Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -269,14 +269,14 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"celebrations"` |  |
-| `"date"` |  |
-| `"description"` |  |
-| `"name"` |  |
-| `"season"` |  |
-| `"season_week"` |  |
-| `"system"` |  |
-| `"weekday"` |  |
+| `"celebrations"` | List of liturgical celebrations for this date |
+| `"date"` | The requested date |
+| `"description"` | Description of the calendar system |
+| `"name"` | Human-readable name of the calendar |
+| `"season"` | Liturgical season |
+| `"season_week"` | Week number within the liturgical season |
+| `"system"` | Calendar system identifier |
+| `"weekday"` | Day of the week |
 
 Operations: List, Load.
 
@@ -302,14 +302,14 @@ Create an instance: `calendar := client.Calendar(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `celebrations` | `[]any` |  |
-| `date` | `string` |  |
-| `description` | `string` |  |
-| `name` | `string` |  |
-| `season` | `string` |  |
-| `season_week` | `int` |  |
-| `system` | `string` |  |
-| `weekday` | `string` |  |
+| `celebrations` | `[]any` | List of liturgical celebrations for this date |
+| `date` | `string` | The requested date |
+| `description` | `string` | Description of the calendar system |
+| `name` | `string` | Human-readable name of the calendar |
+| `season` | `string` | Liturgical season |
+| `season_week` | `int` | Week number within the liturgical season |
+| `system` | `string` | Calendar system identifier |
+| `weekday` | `string` | Day of the week |
 
 #### Example: Load
 

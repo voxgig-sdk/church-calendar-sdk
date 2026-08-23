@@ -116,14 +116,14 @@ const calendar = client.Calendar()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `celebrations` | `any[]` | No |  |
-| `date` | `string` | No |  |
-| `description` | `string` | No |  |
-| `name` | `string` | No |  |
-| `season` | `string` | No |  |
-| `season_week` | `number` | No |  |
-| `system` | `string` | No |  |
-| `weekday` | `string` | No |  |
+| `celebrations` | `any[]` | No | List of liturgical celebrations for this date |
+| `date` | `string` | No | The requested date |
+| `description` | `string` | No | Description of the calendar system |
+| `name` | `string` | No | Human-readable name of the calendar |
+| `season` | `string` | No | Liturgical season |
+| `season_week` | `number` | No | Week number within the liturgical season |
+| `system` | `string` | No | Calendar system identifier |
+| `weekday` | `string` | No | Day of the week |
 
 ### Operations
 

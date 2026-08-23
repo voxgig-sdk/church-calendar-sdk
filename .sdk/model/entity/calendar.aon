@@ -8,41 +8,49 @@ main: kit: entity: calendar: {
     {
       name: "celebrations"
       req: false
+      short: "List of liturgical celebrations for this date"
       type: "`$ARRAY`"
     }
     {
       name: "date"
       req: false
+      short: "The requested date"
       type: "`$STRING`"
     }
     {
       name: "description"
       req: false
+      short: "Description of the calendar system"
       type: "`$STRING`"
     }
     {
       name: "name"
       req: false
+      short: "Human-readable name of the calendar"
       type: "`$STRING`"
     }
     {
       name: "season"
       req: false
+      short: "Liturgical season"
       type: "`$STRING`"
     }
     {
       name: "season_week"
       req: false
+      short: "Week number within the liturgical season"
       type: "`$INTEGER`"
     }
     {
       name: "system"
       req: false
+      short: "Calendar system identifier"
       type: "`$STRING`"
     }
     {
       name: "weekday"
       req: false
+      short: "Day of the week"
       type: "`$STRING`"
     }
   ]

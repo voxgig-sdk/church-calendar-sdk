@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -308,14 +308,14 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `celebrations` |  |
-| `date` |  |
-| `description` |  |
-| `name` |  |
-| `season` |  |
-| `season_week` |  |
-| `system` |  |
-| `weekday` |  |
+| `celebrations` | List of liturgical celebrations for this date |
+| `date` | The requested date |
+| `description` | Description of the calendar system |
+| `name` | Human-readable name of the calendar |
+| `season` | Liturgical season |
+| `season_week` | Week number within the liturgical season |
+| `system` | Calendar system identifier |
+| `weekday` | Day of the week |
 
 Operations: list, load.
 
@@ -341,14 +341,14 @@ Create an instance: `const calendar = client.Calendar()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `celebrations` | `any[]` |  |
-| `date` | `string` |  |
-| `description` | `string` |  |
-| `name` | `string` |  |
-| `season` | `string` |  |
-| `season_week` | `number` |  |
-| `system` | `string` |  |
-| `weekday` | `string` |  |
+| `celebrations` | `any[]` | List of liturgical celebrations for this date |
+| `date` | `string` | The requested date |
+| `description` | `string` | Description of the calendar system |
+| `name` | `string` | Human-readable name of the calendar |
+| `season` | `string` | Liturgical season |
+| `season_week` | `number` | Week number within the liturgical season |
+| `system` | `string` | Calendar system identifier |
+| `weekday` | `string` | Day of the week |
 
 #### Example: Load
 

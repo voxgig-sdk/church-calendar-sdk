@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "ChurchCalendar",
+			"slug": "church-calendar",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -33,34 +36,42 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "celebrations",
+						"short": "List of liturgical celebrations for this date",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "date",
+						"short": "The requested date",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "description",
+						"short": "Description of the calendar system",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Human-readable name of the calendar",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "season",
+						"short": "Liturgical season",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "season_week",
+						"short": "Week number within the liturgical season",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "system",
+						"short": "Calendar system identifier",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "weekday",
+						"short": "Day of the week",
 						"type": "`$STRING`",
 					},
 				},

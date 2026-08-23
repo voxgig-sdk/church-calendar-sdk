@@ -87,14 +87,14 @@ calendar = client.Calendar()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `celebrations` | `list` | No |  |
-| `date` | `str` | No |  |
-| `description` | `str` | No |  |
-| `name` | `str` | No |  |
-| `season` | `str` | No |  |
-| `season_week` | `int` | No |  |
-| `system` | `str` | No |  |
-| `weekday` | `str` | No |  |
+| `celebrations` | `list` | No | List of liturgical celebrations for this date |
+| `date` | `str` | No | The requested date |
+| `description` | `str` | No | Description of the calendar system |
+| `name` | `str` | No | Human-readable name of the calendar |
+| `season` | `str` | No | Liturgical season |
+| `season_week` | `int` | No | Week number within the liturgical season |
+| `system` | `str` | No | Calendar system identifier |
+| `weekday` | `str` | No | Day of the week |
 
 ### Operations
 

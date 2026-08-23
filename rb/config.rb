@@ -19,6 +19,9 @@ module ChurchCalendarConfig
     {
       "main" => {
         "name" => "ChurchCalendar",
+        "slug" => "church-calendar",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -41,34 +44,42 @@ module ChurchCalendarConfig
           "fields" => [
             {
               "name" => "celebrations",
+              "short" => "List of liturgical celebrations for this date",
               "type" => "`$ARRAY`",
             },
             {
               "name" => "date",
+              "short" => "The requested date",
               "type" => "`$STRING`",
             },
             {
               "name" => "description",
+              "short" => "Description of the calendar system",
               "type" => "`$STRING`",
             },
             {
               "name" => "name",
+              "short" => "Human-readable name of the calendar",
               "type" => "`$STRING`",
             },
             {
               "name" => "season",
+              "short" => "Liturgical season",
               "type" => "`$STRING`",
             },
             {
               "name" => "season_week",
+              "short" => "Week number within the liturgical season",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "system",
+              "short" => "Calendar system identifier",
               "type" => "`$STRING`",
             },
             {
               "name" => "weekday",
+              "short" => "Day of the week",
               "type" => "`$STRING`",
             },
           ],

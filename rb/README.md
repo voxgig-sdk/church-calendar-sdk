@@ -252,14 +252,14 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `celebrations` |  |
-| `date` |  |
-| `description` |  |
-| `name` |  |
-| `season` |  |
-| `season_week` |  |
-| `system` |  |
-| `weekday` |  |
+| `celebrations` | List of liturgical celebrations for this date |
+| `date` | The requested date |
+| `description` | Description of the calendar system |
+| `name` | Human-readable name of the calendar |
+| `season` | Liturgical season |
+| `season_week` | Week number within the liturgical season |
+| `system` | Calendar system identifier |
+| `weekday` | Day of the week |
 
 Operations: List, Load.
 
@@ -285,14 +285,14 @@ Create an instance: `calendar = client.Calendar`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `celebrations` | `Array` |  |
-| `date` | `String` |  |
-| `description` | `String` |  |
-| `name` | `String` |  |
-| `season` | `String` |  |
-| `season_week` | `Integer` |  |
-| `system` | `String` |  |
-| `weekday` | `String` |  |
+| `celebrations` | `Array` | List of liturgical celebrations for this date |
+| `date` | `String` | The requested date |
+| `description` | `String` | Description of the calendar system |
+| `name` | `String` | Human-readable name of the calendar |
+| `season` | `String` | Liturgical season |
+| `season_week` | `Integer` | Week number within the liturgical season |
+| `system` | `String` | Calendar system identifier |
+| `weekday` | `String` | Day of the week |
 
 #### Example: Load
 
