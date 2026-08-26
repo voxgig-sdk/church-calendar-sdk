@@ -42,6 +42,7 @@ class ChurchCalendarConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [

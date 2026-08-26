@@ -28,6 +28,7 @@ module ChurchCalendarConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
