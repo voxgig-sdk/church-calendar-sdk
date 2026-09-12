@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -72,6 +83,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date",
           "name": "date",
           "short": "The requested date",
           "type": "`$STRING`"
@@ -79,6 +91,10 @@ class Config {
         {
           "name": "description",
           "short": "Description of the calendar system",
+          "type": "`$STRING`"
+        },
+        {
+          "name": "id",
           "type": "`$STRING`"
         },
         {
@@ -107,6 +123,20 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "from": {
+          "calendar": "name"
+        },
+        "name": "id",
+        "parts": [
+          "calendar",
+          "year",
+          "month",
+          "day"
+        ],
+        "sep": "/"
+      },
       "name": "calendar",
       "op": {
         "list": {
@@ -129,11 +159,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v0/{locale}/calendars",
-              "parts": [
-                "api",
-                "v0",
-                "{locale}",
-                "calendars"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v0"
+                },
+                {
+                  "var": "locale"
+                },
+                {
+                  "lit": "calendars"
+                }
               ],
               "select": {
                 "exist": [
@@ -143,7 +181,13 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v0",
+                "{locale}",
+                "calendars"
+              ]
             }
           ]
         },
@@ -191,15 +235,31 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/v0/en/calendars/{calendar}/{year}/{month}/{day}",
-              "parts": [
-                "api",
-                "v0",
-                "en",
-                "calendars",
-                "{calendar}",
-                "{year}",
-                "{month}",
-                "{day}"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "v0"
+                },
+                {
+                  "lit": "en"
+                },
+                {
+                  "lit": "calendars"
+                },
+                {
+                  "var": "calendar"
+                },
+                {
+                  "var": "year"
+                },
+                {
+                  "var": "month"
+                },
+                {
+                  "var": "day"
+                }
               ],
               "select": {
                 "exist": [
@@ -212,7 +272,17 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "v0",
+                "en",
+                "calendars",
+                "{calendar}",
+                "{year}",
+                "{month}",
+                "{day}"
+              ]
             }
           ]
         }
@@ -235,6 +305,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

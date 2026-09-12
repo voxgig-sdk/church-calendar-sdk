@@ -63,6 +63,7 @@ class ChurchCalendarConfig
               'type' => '`$ARRAY`',
             ],
             [
+              'format' => 'date',
               'name' => 'date',
               'short' => 'The requested date',
               'type' => '`$STRING`',
@@ -70,6 +71,10 @@ class ChurchCalendarConfig
             [
               'name' => 'description',
               'short' => 'Description of the calendar system',
+              'type' => '`$STRING`',
+            ],
+            [
+              'name' => 'id',
               'type' => '`$STRING`',
             ],
             [
@@ -98,6 +103,20 @@ class ChurchCalendarConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'from' => [
+              'calendar' => 'name',
+            ],
+            'name' => 'id',
+            'parts' => [
+              'calendar',
+              'year',
+              'month',
+              'day',
+            ],
+            'sep' => '/',
+          ],
           'name' => 'calendar',
           'op' => [
             'list' => [
@@ -120,11 +139,19 @@ class ChurchCalendarConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/v0/{locale}/calendars',
-                  'parts' => [
-                    'api',
-                    'v0',
-                    '{locale}',
-                    'calendars',
+                  'segments' => [
+                    [
+                      'lit' => 'api',
+                    ],
+                    [
+                      'lit' => 'v0',
+                    ],
+                    [
+                      'var' => 'locale',
+                    ],
+                    [
+                      'lit' => 'calendars',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -134,6 +161,12 @@ class ChurchCalendarConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'api',
+                    'v0',
+                    '{locale}',
+                    'calendars',
                   ],
                 ],
               ],
@@ -182,15 +215,31 @@ class ChurchCalendarConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/v0/en/calendars/{calendar}/{year}/{month}/{day}',
-                  'parts' => [
-                    'api',
-                    'v0',
-                    'en',
-                    'calendars',
-                    '{calendar}',
-                    '{year}',
-                    '{month}',
-                    '{day}',
+                  'segments' => [
+                    [
+                      'lit' => 'api',
+                    ],
+                    [
+                      'lit' => 'v0',
+                    ],
+                    [
+                      'lit' => 'en',
+                    ],
+                    [
+                      'lit' => 'calendars',
+                    ],
+                    [
+                      'var' => 'calendar',
+                    ],
+                    [
+                      'var' => 'year',
+                    ],
+                    [
+                      'var' => 'month',
+                    ],
+                    [
+                      'var' => 'day',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -203,6 +252,16 @@ class ChurchCalendarConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'api',
+                    'v0',
+                    'en',
+                    'calendars',
+                    '{calendar}',
+                    '{year}',
+                    '{month}',
+                    '{day}',
                   ],
                 ],
               ],

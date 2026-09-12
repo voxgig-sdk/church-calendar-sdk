@@ -37,7 +37,7 @@ begin
   # list returns an Array of Calendar records — iterate directly.
   calendars = client.Calendar.list
   calendars.each do |item|
-    puts "#{item["celebrations"]}"
+    puts "#{item["id"]} #{item["celebrations"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -255,6 +255,7 @@ returns a result `Hash` with these keys:
 | `celebrations` | List of liturgical celebrations for this date |
 | `date` | The requested date |
 | `description` | Description of the calendar system |
+| `id` |  |
 | `name` | Human-readable name of the calendar |
 | `season` | Liturgical season |
 | `season_week` | Week number within the liturgical season |
@@ -288,6 +289,7 @@ Create an instance: `calendar = client.Calendar`
 | `celebrations` | `Array` | List of liturgical celebrations for this date |
 | `date` | `String` | The requested date |
 | `description` | `String` | Description of the calendar system |
+| `id` | `String` |  |
 | `name` | `String` | Human-readable name of the calendar |
 | `season` | `String` | Liturgical season |
 | `season_week` | `Integer` | Week number within the liturgical season |

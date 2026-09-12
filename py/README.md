@@ -260,6 +260,7 @@ On error, `ok` is `False` and `err` contains the error value.
 | `celebrations` | List of liturgical celebrations for this date |
 | `date` | The requested date |
 | `description` | Description of the calendar system |
+| `id` |  |
 | `name` | Human-readable name of the calendar |
 | `season` | Liturgical season |
 | `season_week` | Week number within the liturgical season |
@@ -293,6 +294,7 @@ Create an instance: `calendar = client.Calendar()`
 | `celebrations` | `list` | List of liturgical celebrations for this date |
 | `date` | `str` | The requested date |
 | `description` | `str` | Description of the calendar system |
+| `id` | `str` |  |
 | `name` | `str` | Human-readable name of the calendar |
 | `season` | `str` | Liturgical season |
 | `season_week` | `int` | Week number within the liturgical season |

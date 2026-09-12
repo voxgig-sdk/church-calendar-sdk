@@ -9,6 +9,7 @@ export interface Calendar {
   celebrations?: any[]
   date?: string
   description?: string
+  id?: string
   name?: string
   season?: string
   season_week?: number

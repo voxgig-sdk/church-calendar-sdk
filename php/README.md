@@ -38,7 +38,7 @@ try {
     // list() returns an array of Calendar records — iterate directly.
     $calendars = $client->Calendar()->list();
     foreach ($calendars as $item) {
-        echo $item["celebrations"] . "\n";
+        echo $item["id"] . " " . $item["celebrations"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -265,6 +265,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 | `celebrations` | List of liturgical celebrations for this date |
 | `date` | The requested date |
 | `description` | Description of the calendar system |
+| `id` |  |
 | `name` | Human-readable name of the calendar |
 | `season` | Liturgical season |
 | `season_week` | Week number within the liturgical season |
@@ -298,6 +299,7 @@ Create an instance: `$calendar = $client->Calendar();`
 | `celebrations` | `array` | List of liturgical celebrations for this date |
 | `date` | `string` | The requested date |
 | `description` | `string` | Description of the calendar system |
+| `id` | `string` |  |
 | `name` | `string` | Human-readable name of the calendar |
 | `season` | `string` | Liturgical season |
 | `season_week` | `int` | Week number within the liturgical season |

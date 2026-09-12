@@ -12,6 +12,7 @@ main: kit: entity: calendar: {
       type: "`$ARRAY`"
     }
     {
+      format: "date"
       name: "date"
       req: false
       short: "The requested date"
@@ -21,6 +22,11 @@ main: kit: entity: calendar: {
       name: "description"
       req: false
       short: "Description of the calendar system"
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
       type: "`$STRING`"
     }
     {
@@ -55,6 +61,21 @@ main: kit: entity: calendar: {
     }
   ]
 
+  id: {
+    field: "id"
+    from: {
+      calendar: "name"
+    }
+    name: "id"
+    parts: [
+      "calendar"
+      "year"
+      "month"
+      "day"
+    ]
+    sep: "/"
+  }
+
   name: "calendar"
   op: {
     list: {
@@ -75,11 +96,19 @@ main: kit: entity: calendar: {
           }
           method: "GET"
           orig: "/api/v0/{locale}/calendars"
-          parts: [
-            "api"
-            "v0"
-            "{locale}"
-            "calendars"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v0"
+            }
+            {
+              var: "locale"
+            }
+            {
+              lit: "calendars"
+            }
           ]
           select: {
             exist: [
@@ -135,15 +164,31 @@ main: kit: entity: calendar: {
           }
           method: "GET"
           orig: "/api/v0/en/calendars/{calendar}/{year}/{month}/{day}"
-          parts: [
-            "api"
-            "v0"
-            "en"
-            "calendars"
-            "{calendar}"
-            "{year}"
-            "{month}"
-            "{day}"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "v0"
+            }
+            {
+              lit: "en"
+            }
+            {
+              lit: "calendars"
+            }
+            {
+              var: "calendar"
+            }
+            {
+              var: "year"
+            }
+            {
+              var: "month"
+            }
+            {
+              var: "day"
+            }
           ]
           select: {
             exist: [

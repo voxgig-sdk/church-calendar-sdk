@@ -96,6 +96,7 @@ calendar = client.Calendar
 | `celebrations` | `Array` | No | List of liturgical celebrations for this date |
 | `date` | `String` | No | The requested date |
 | `description` | `String` | No | Description of the calendar system |
+| `id` | `String` | No |  |
 | `name` | `String` | No | Human-readable name of the calendar |
 | `season` | `String` | No | Liturgical season |
 | `season_week` | `Integer` | No | Week number within the liturgical season |

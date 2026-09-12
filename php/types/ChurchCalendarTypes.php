@@ -18,6 +18,7 @@ class Calendar
     public ?array $celebrations = null;
     public ?string $date = null;
     public ?string $description = null;
+    public ?string $id = null;
     public ?string $name = null;
     public ?string $season = null;
     public ?int $season_week = null;

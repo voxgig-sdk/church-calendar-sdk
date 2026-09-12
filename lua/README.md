@@ -43,7 +43,7 @@ local calendars, err = client:Calendar():list()
 if err then error(err) end
 
 for _, item in ipairs(calendars) do
-  print(item["date"])
+  print(item["id"], item["date"])
 end
 ```
 
@@ -246,6 +246,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | `celebrations` | List of liturgical celebrations for this date |
 | `date` | The requested date |
 | `description` | Description of the calendar system |
+| `id` |  |
 | `name` | Human-readable name of the calendar |
 | `season` | Liturgical season |
 | `season_week` | Week number within the liturgical season |
@@ -279,6 +280,7 @@ Create an instance: `local calendar = client:Calendar(nil)`
 | `celebrations` | `table` | List of liturgical celebrations for this date |
 | `date` | `string` | The requested date |
 | `description` | `string` | Description of the calendar system |
+| `id` | `string` |  |
 | `name` | `string` | Human-readable name of the calendar |
 | `season` | `string` | Liturgical season |
 | `season_week` | `number` | Week number within the liturgical season |

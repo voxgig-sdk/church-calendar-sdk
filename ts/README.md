@@ -165,7 +165,7 @@ await entity.list()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data)
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -311,6 +311,7 @@ The `prepare()` method returns:
 | `celebrations` | List of liturgical celebrations for this date |
 | `date` | The requested date |
 | `description` | Description of the calendar system |
+| `id` |  |
 | `name` | Human-readable name of the calendar |
 | `season` | Liturgical season |
 | `season_week` | Week number within the liturgical season |
@@ -344,6 +345,7 @@ Create an instance: `const calendar = client.Calendar()`
 | `celebrations` | `any[]` | List of liturgical celebrations for this date |
 | `date` | `string` | The requested date |
 | `description` | `string` | Description of the calendar system |
+| `id` | `string` |  |
 | `name` | `string` | Human-readable name of the calendar |
 | `season` | `string` | Liturgical season |
 | `season_week` | `number` | Week number within the liturgical season |

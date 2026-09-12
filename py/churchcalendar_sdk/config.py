@@ -1,6 +1,14 @@
 # ChurchCalendar SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -58,6 +66,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date",
             "name": "date",
             "short": "The requested date",
             "type": "`$STRING`",
@@ -65,6 +74,10 @@ def make_config():
           {
             "name": "description",
             "short": "Description of the calendar system",
+            "type": "`$STRING`",
+          },
+          {
+            "name": "id",
             "type": "`$STRING`",
           },
           {
@@ -93,6 +106,20 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "from": {
+            "calendar": "name",
+          },
+          "name": "id",
+          "parts": [
+            "calendar",
+            "year",
+            "month",
+            "day",
+          ],
+          "sep": "/",
+        },
         "name": "calendar",
         "op": {
           "list": {
@@ -115,11 +142,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v0/{locale}/calendars",
-                "parts": [
-                  "api",
-                  "v0",
-                  "{locale}",
-                  "calendars",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v0",
+                  },
+                  {
+                    "var": "locale",
+                  },
+                  {
+                    "lit": "calendars",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -130,6 +165,12 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v0",
+                  "{locale}",
+                  "calendars",
+                ],
               },
             ],
           },
@@ -177,15 +218,31 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/v0/en/calendars/{calendar}/{year}/{month}/{day}",
-                "parts": [
-                  "api",
-                  "v0",
-                  "en",
-                  "calendars",
-                  "{calendar}",
-                  "{year}",
-                  "{month}",
-                  "{day}",
+                "segments": [
+                  {
+                    "lit": "api",
+                  },
+                  {
+                    "lit": "v0",
+                  },
+                  {
+                    "lit": "en",
+                  },
+                  {
+                    "lit": "calendars",
+                  },
+                  {
+                    "var": "calendar",
+                  },
+                  {
+                    "var": "year",
+                  },
+                  {
+                    "var": "month",
+                  },
+                  {
+                    "var": "day",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -199,6 +256,16 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "api",
+                  "v0",
+                  "en",
+                  "calendars",
+                  "{calendar}",
+                  "{year}",
+                  "{month}",
+                  "{day}",
+                ],
               },
             ],
           },

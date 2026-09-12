@@ -41,6 +41,7 @@ func MakeConfig() map[string]any {
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
+						"format": "date",
 						"name": "date",
 						"short": "The requested date",
 						"type": "`$STRING`",
@@ -48,6 +49,10 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "description",
 						"short": "Description of the calendar system",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -76,6 +81,20 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 				},
+				"id": map[string]any{
+					"field": "id",
+					"from": map[string]any{
+						"calendar": "name",
+					},
+					"name": "id",
+					"parts": []any{
+						"calendar",
+						"year",
+						"month",
+						"day",
+					},
+					"sep": "/",
+				},
 				"name": "calendar",
 				"op": map[string]any{
 					"list": map[string]any{
@@ -98,11 +117,19 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/api/v0/{locale}/calendars",
-								"parts": []any{
-									"api",
-									"v0",
-									"{locale}",
-									"calendars",
+								"segments": []any{
+									map[string]any{
+										"lit": "api",
+									},
+									map[string]any{
+										"lit": "v0",
+									},
+									map[string]any{
+										"var": "locale",
+									},
+									map[string]any{
+										"lit": "calendars",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -112,6 +139,12 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"api",
+									"v0",
+									"{locale}",
+									"calendars",
 								},
 							},
 						},
@@ -160,15 +193,31 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/api/v0/en/calendars/{calendar}/{year}/{month}/{day}",
-								"parts": []any{
-									"api",
-									"v0",
-									"en",
-									"calendars",
-									"{calendar}",
-									"{year}",
-									"{month}",
-									"{day}",
+								"segments": []any{
+									map[string]any{
+										"lit": "api",
+									},
+									map[string]any{
+										"lit": "v0",
+									},
+									map[string]any{
+										"lit": "en",
+									},
+									map[string]any{
+										"lit": "calendars",
+									},
+									map[string]any{
+										"var": "calendar",
+									},
+									map[string]any{
+										"var": "year",
+									},
+									map[string]any{
+										"var": "month",
+									},
+									map[string]any{
+										"var": "day",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -181,6 +230,16 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"api",
+									"v0",
+									"en",
+									"calendars",
+									"{calendar}",
+									"{year}",
+									"{month}",
+									"{day}",
 								},
 							},
 						},
@@ -199,6 +258,17 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+// The plugin definitions the model selected per feature, as []any so a
+// feature package can consume them without core naming its types. Empty
+// when no active feature declares active plugin groups for this target.
+var featurePlugins = map[string][]any{
+}
+
+// FeaturePlugins is the definitions list for one feature's chain.
+func FeaturePlugins(name string) []any {
+	return featurePlugins[name]
 }
 
 var (

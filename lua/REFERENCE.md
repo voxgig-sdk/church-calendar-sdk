@@ -93,6 +93,7 @@ local calendar = client:Calendar(nil)
 | `celebrations` | `table` | No | List of liturgical celebrations for this date |
 | `date` | `string` | No | The requested date |
 | `description` | `string` | No | Description of the calendar system |
+| `id` | `string` | No |  |
 | `name` | `string` | No | Human-readable name of the calendar |
 | `season` | `string` | No | Liturgical season |
 | `season_week` | `number` | No | Week number within the liturgical season |

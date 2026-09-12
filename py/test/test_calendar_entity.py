@@ -90,9 +90,13 @@ class TestCalendarEntity:
         assert isinstance(calendar_ref01_list_result, list)
 
         # LOAD
-        calendar_ref01_match_dt0 = {}
+        calendar_ref01_match_dt0 = {
+            "id": calendar_ref01_data["id"],
+        }
         calendar_ref01_data_dt0_loaded = calendar_ref01_ent.load(calendar_ref01_match_dt0, None)
-        assert calendar_ref01_data_dt0_loaded is not None
+        calendar_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(calendar_ref01_data_dt0_loaded))
+        assert calendar_ref01_data_dt0_load_result is not None
+        assert calendar_ref01_data_dt0_load_result["id"] == calendar_ref01_data["id"]
 
 
 
@@ -141,6 +145,10 @@ def _calendar_basic_setup(extra):
 
     if env.get("CHURCH_CALENDAR_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
+            # FIRST, so the generated fields below win: sdk-test-control.json's
+            # test.client.options adds to the live client, it does not
+            # redirect it.
+            runner.live_client_options(),
             {
             },
             extra or {},

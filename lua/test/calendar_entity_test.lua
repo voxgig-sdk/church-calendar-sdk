@@ -94,10 +94,14 @@ describe("CalendarEntity", function()
     assert.is_table(calendar_ref01_list_result)
 
     -- LOAD
-    local calendar_ref01_match_dt0 = {}
+    local calendar_ref01_match_dt0 = {
+      id = calendar_ref01_data["id"],
+    }
     local calendar_ref01_data_dt0_loaded, err = calendar_ref01_ent:load(calendar_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(calendar_ref01_data_dt0_loaded)
+    local calendar_ref01_data_dt0_load_result = helpers.to_map(type(calendar_ref01_data_dt0_loaded) == 'table' and calendar_ref01_data_dt0_loaded.data_get and calendar_ref01_data_dt0_loaded:data_get() or calendar_ref01_data_dt0_loaded)
+    assert.is_not_nil(calendar_ref01_data_dt0_load_result)
+    assert.are.equal(calendar_ref01_data_dt0_load_result["id"], calendar_ref01_data["id"])
 
   end)
 end)
@@ -151,6 +155,9 @@ function calendar_basic_setup(extra)
 
   if env["CHURCH_CALENDAR_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
+      -- FIRST, so the generated fields below win: sdk-test-control.json's
+      -- test.client.options adds to the live client, it does not redirect it.
+      runner.live_client_options(),
       {
       },
       extra or {},

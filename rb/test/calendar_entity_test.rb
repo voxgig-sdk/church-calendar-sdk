@@ -85,9 +85,13 @@ class CalendarEntityTest < Minitest::Test
     assert calendar_ref01_list_result.is_a?(Array)
 
     # LOAD
-    calendar_ref01_match_dt0 = {}
+    calendar_ref01_match_dt0 = {
+      "id" => calendar_ref01_data["id"],
+    }
     calendar_ref01_data_dt0_loaded = calendar_ref01_ent.load(calendar_ref01_match_dt0, nil)
-    assert !calendar_ref01_data_dt0_loaded.nil?
+    calendar_ref01_data_dt0_load_result = Helpers.to_map(calendar_ref01_data_dt0_loaded.respond_to?(:data_get) ? calendar_ref01_data_dt0_loaded.data_get : calendar_ref01_data_dt0_loaded)
+    assert !calendar_ref01_data_dt0_load_result.nil?
+    assert_equal calendar_ref01_data_dt0_load_result["id"], calendar_ref01_data["id"]
 
   end
 end
@@ -135,6 +139,9 @@ def calendar_basic_setup(extra)
 
   if env["CHURCH_CALENDAR_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      Runner.live_client_options,
       {
       },
       extra || {},

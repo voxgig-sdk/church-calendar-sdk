@@ -19,6 +19,9 @@
 # @!attribute [rw] description
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] name
 #   @return [String, nil]
 #
@@ -37,6 +40,7 @@ Calendar = Struct.new(
   :celebrations,
   :date,
   :description,
+  :id,
   :name,
   :season,
   :season_week,

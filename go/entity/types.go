@@ -17,6 +17,7 @@ type Calendar struct {
 	Celebrations *[]any `json:"celebrations,omitempty"`
 	Date *string `json:"date,omitempty"`
 	Description *string `json:"description,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Season *string `json:"season,omitempty"`
 	SeasonWeek *int `json:"season_week,omitempty"`

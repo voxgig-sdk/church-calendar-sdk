@@ -20,6 +20,7 @@ class Calendar(TypedDict, total=False):
     celebrations: list
     date: str
     description: str
+    id: str
     name: str
     season: str
     season_week: int

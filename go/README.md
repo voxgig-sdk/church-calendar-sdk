@@ -272,6 +272,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | `"celebrations"` | List of liturgical celebrations for this date |
 | `"date"` | The requested date |
 | `"description"` | Description of the calendar system |
+| `"id"` |  |
 | `"name"` | Human-readable name of the calendar |
 | `"season"` | Liturgical season |
 | `"season_week"` | Week number within the liturgical season |
@@ -305,6 +306,7 @@ Create an instance: `calendar := client.Calendar(nil)`
 | `celebrations` | `[]any` | List of liturgical celebrations for this date |
 | `date` | `string` | The requested date |
 | `description` | `string` | Description of the calendar system |
+| `id` | `string` |  |
 | `name` | `string` | Human-readable name of the calendar |
 | `season` | `string` | Liturgical season |
 | `season_week` | `int` | Week number within the liturgical season |

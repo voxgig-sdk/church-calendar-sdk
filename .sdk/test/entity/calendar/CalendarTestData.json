@@ -3,51 +3,51 @@
     "calendar": {
       "CALENDAR00": {
         "celebrations": [],
-        "date": "s51",
-        "description": "s52",
-        "name": "s53",
-        "season": "s54",
-        "season_week": "s55",
-        "system": "s56",
-        "weekday": "s57",
+        "date": "s5b",
+        "description": "s5c",
+        "id": "CALENDAR00",
+        "name": "s5e",
+        "season": "s5f",
+        "season_week": "s60",
+        "system": "s61",
+        "weekday": "s62",
         "locale": "LOCALE01",
         "calendar": "CALENDAR01",
         "day": "DAY01",
         "month": "MONTH01",
-        "year": "YEAR01",
-        "id": "CALENDAR00"
+        "year": "YEAR01"
       },
       "CALENDAR01": {
         "celebrations": [],
-        "date": "sa1",
-        "description": "sa2",
-        "name": "sa3",
-        "season": "sa4",
-        "season_week": "sa5",
-        "system": "sa6",
-        "weekday": "sa7",
+        "date": "sb5",
+        "description": "sb6",
+        "id": "CALENDAR01",
+        "name": "sb8",
+        "season": "sb9",
+        "season_week": "sba",
+        "system": "sbb",
+        "weekday": "sbc",
         "locale": "LOCALE01",
         "calendar": "CALENDAR01",
         "day": "DAY01",
         "month": "MONTH01",
-        "year": "YEAR01",
-        "id": "CALENDAR01"
+        "year": "YEAR01"
       },
       "CALENDAR02": {
         "celebrations": [],
-        "date": "sf1",
-        "description": "sf2",
-        "name": "sf3",
-        "season": "sf4",
-        "season_week": "sf5",
-        "system": "sf6",
-        "weekday": "sf7",
+        "date": "s10f",
+        "description": "s110",
+        "id": "CALENDAR02",
+        "name": "s112",
+        "season": "s113",
+        "season_week": "s114",
+        "system": "s115",
+        "weekday": "s116",
         "locale": "LOCALE01",
         "calendar": "CALENDAR01",
         "day": "DAY01",
         "month": "MONTH01",
-        "year": "YEAR01",
-        "id": "CALENDAR02"
+        "year": "YEAR01"
       }
     }
   },
@@ -55,13 +55,13 @@
     "calendar": {
       "calendar_ref01": {
         "celebrations": [],
-        "date": "s141",
-        "description": "s142",
-        "name": "s143",
-        "season": "s144",
-        "season_week": "s145",
-        "system": "s146",
-        "weekday": "s147"
+        "date": "s169",
+        "description": "s16a",
+        "name": "s16c",
+        "season": "s16d",
+        "season_week": "s16e",
+        "system": "s16f",
+        "weekday": "s170"
       }
     }
   }

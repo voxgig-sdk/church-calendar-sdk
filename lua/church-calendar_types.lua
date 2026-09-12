@@ -10,6 +10,7 @@
 ---@field celebrations? table
 ---@field date? string
 ---@field description? string
+---@field id? string
 ---@field name? string
 ---@field season? string
 ---@field season_week? number

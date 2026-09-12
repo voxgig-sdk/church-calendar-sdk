@@ -98,7 +98,7 @@ func TestCalendarEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		calendarRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.calendar", setup.data)))
+		calendarRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.calendar")))
 		var calendarRef01Data map[string]any
 		if len(calendarRef01DataRaw) > 0 {
 			calendarRef01Data = core.ToMapAny(calendarRef01DataRaw[0][1])
@@ -123,13 +123,19 @@ func TestCalendarEntity(t *testing.T) {
 		}
 
 		// LOAD
-		calendarRef01MatchDt0 := map[string]any{}
+		calendarRef01MatchDt0 := map[string]any{
+			"id": calendarRef01Data["id"],
+		}
 		calendarRef01DataDt0Loaded, err := calendarRef01Ent.Load(calendarRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if calendarRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		calendarRef01DataDt0LoadResult := core.ToMapAny(entityData(calendarRef01DataDt0Loaded))
+		if calendarRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if calendarRef01DataDt0LoadResult["id"] != calendarRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})
@@ -159,7 +165,7 @@ func calendarBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"calendar01", "calendar02", "calendar03", "v001", "v002", "v003", "locale01", "month01", "year01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -187,10 +193,22 @@ func calendarBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["CHURCH_CALENDAR_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewChurchCalendarSDK(core.ToMapAny(mergedOpts))
 	}
