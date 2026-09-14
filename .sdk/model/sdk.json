@@ -997,7 +997,7 @@
             "registry": {
               "active": false,
               "name": "npm",
-              "package": "",
+              "package": "@voxgig-sdk/church-calendar-sdk",
               "state": "pending",
               "url": "https://registry.npmjs.org",
               "vault": {

@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { ChurchCalendarSDK } from '@voxgig-sdk/church-calendar'
+import { ChurchCalendarSDK } from '@voxgig-sdk/church-calendar-sdk'
 
 const client = new ChurchCalendarSDK()
 ```
@@ -447,7 +447,7 @@ church-calendar/
 Import the SDK from the package root:
 
 ```ts
-import { ChurchCalendarSDK } from '@voxgig-sdk/church-calendar'
+import { ChurchCalendarSDK } from '@voxgig-sdk/church-calendar-sdk'
 ```
 
 ### Entity state

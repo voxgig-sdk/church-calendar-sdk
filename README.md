@@ -105,7 +105,7 @@ local results, err = client:Calendar():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/church-calendar` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/releases) |
+| TypeScript | `@voxgig-sdk/church-calendar-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/releases) |
 | Python | `voxgig-sdk-church-calendar` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/releases) |
 | PHP | `voxgig-sdk/church-calendar` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/church-calendar-sdk/go` | `go get github.com/voxgig-sdk/church-calendar-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Calendar():list()
 ### TypeScript
 
 ```ts
-import { ChurchCalendarSDK } from '@voxgig-sdk/church-calendar'
+import { ChurchCalendarSDK } from '@voxgig-sdk/church-calendar-sdk'
 
 const client = new ChurchCalendarSDK()
 
