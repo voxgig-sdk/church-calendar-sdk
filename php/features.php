@@ -4,7 +4,10 @@ declare(strict_types=1);
 // ChurchCalendar SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class ChurchCalendarFeatures
@@ -14,8 +17,14 @@ class ChurchCalendarFeatures
         switch ($name) {
             case "base":
                 return new ChurchCalendarBaseFeature();
+            case "ratelimit":
+                return new ChurchCalendarRatelimitFeature();
+            case "retry":
+                return new ChurchCalendarRetryFeature();
             case "test":
                 return new ChurchCalendarTestFeature();
+            case "timeout":
+                return new ChurchCalendarTimeoutFeature();
             default:
                 return new ChurchCalendarBaseFeature();
         }
@@ -31,7 +40,10 @@ class ChurchCalendarFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

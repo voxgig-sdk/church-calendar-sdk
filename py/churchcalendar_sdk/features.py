@@ -1,12 +1,18 @@
 # ChurchCalendar SDK feature factory
 
 from churchcalendar_sdk.feature.base_feature import ChurchCalendarBaseFeature
+from churchcalendar_sdk.feature.ratelimit_feature import ChurchCalendarRatelimitFeature
+from churchcalendar_sdk.feature.retry_feature import ChurchCalendarRetryFeature
 from churchcalendar_sdk.feature.test_feature import ChurchCalendarTestFeature
+from churchcalendar_sdk.feature.timeout_feature import ChurchCalendarTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: ChurchCalendarBaseFeature(),
+    "ratelimit": lambda: ChurchCalendarRatelimitFeature(),
+    "retry": lambda: ChurchCalendarRetryFeature(),
     "test": lambda: ChurchCalendarTestFeature(),
+    "timeout": lambda: ChurchCalendarTimeoutFeature(),
 }
 
 

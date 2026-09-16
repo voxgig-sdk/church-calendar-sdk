@@ -94,6 +94,12 @@ main: kit: entity: calendar: {
               }
             ]
           }
+          contract: {
+            id: "GET /api/v0/{locale}/calendars"
+            json: "{\"operationId\":\"getCalendars\",\"parameters\":[{\"description\":\"Language/locale code (e.g., en, la, cs, it, fr)\",\"example\":\"en\",\"in\":\"path\",\"name\":\"locale\",\"required\":true,\"schema\":{\"pattern\":\"^[a-z]{2}$\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"description\":{\"description\":\"Description of the calendar system\",\"type\":\"string\"},\"name\":{\"description\":\"Human-readable name of the calendar\",\"type\":\"string\"},\"system\":{\"description\":\"Calendar system identifier\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with list of available calendars\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Locale not found\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/api/v0/{locale}/calendars"
           segments: [
@@ -161,6 +167,12 @@ main: kit: entity: calendar: {
                 type: "`$INTEGER`"
               }
             ]
+          }
+          contract: {
+            id: "GET /api/v0/en/calendars/{calendar}/{year}/{month}/{day}"
+            json: "{\"operationId\":\"getCalendarDay\",\"parameters\":[{\"description\":\"Calendar system identifier (e.g., default, general-en, general-la)\",\"example\":\"default\",\"in\":\"path\",\"name\":\"calendar\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Year (4-digit format)\",\"example\":2024,\"in\":\"path\",\"name\":\"year\",\"required\":true,\"schema\":{\"maximum\":2100,\"minimum\":1900,\"type\":\"integer\"}},{\"description\":\"Month (1-12)\",\"example\":12,\"in\":\"path\",\"name\":\"month\",\"required\":true,\"schema\":{\"maximum\":12,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Day of the month (1-31)\",\"example\":25,\"in\":\"path\",\"name\":\"day\",\"required\":true,\"schema\":{\"maximum\":31,\"minimum\":1,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"celebrations\":{\"description\":\"List of liturgical celebrations for this date\",\"items\":{\"properties\":{\"colour\":{\"description\":\"Liturgical color for the celebration\",\"type\":\"string\"},\"rank\":{\"description\":\"Liturgical rank of the celebration\",\"type\":\"string\"},\"rank_num\":{\"description\":\"Numerical rank value\",\"type\":\"number\"},\"title\":{\"description\":\"Title of the celebration\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"date\":{\"description\":\"The requested date\",\"format\":\"date\",\"type\":\"string\"},\"season\":{\"description\":\"Liturgical season\",\"type\":\"string\"},\"season_week\":{\"description\":\"Week number within the liturgical season\",\"type\":\"integer\"},\"weekday\":{\"description\":\"Day of the week\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response with calendar data\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid request parameters\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error message\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Date or calendar not found\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/api/v0/en/calendars/{calendar}/{year}/{month}/{day}"
