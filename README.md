@@ -105,12 +105,12 @@ local results, err = client:Calendar():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/church-calendar-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/releases) |
-| Python | `voxgig-sdk-church-calendar` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/releases) |
-| PHP | `voxgig-sdk/church-calendar` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/releases) |
+| TypeScript | `@voxgig-sdk/church-calendar-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/tags) |
+| Python | `voxgig-sdk-church-calendar` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/tags) |
+| PHP | `voxgig-sdk/church-calendar` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/church-calendar-sdk/go` | `go get github.com/voxgig-sdk/church-calendar-sdk/go@latest` |
-| Ruby | `voxgig-sdk-church-calendar` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/releases) |
-| Lua | `voxgig-sdk-church-calendar` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/releases) |
+| Ruby | `voxgig-sdk-church-calendar` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/tags) |
+| Lua | `voxgig-sdk-church-calendar` | publish pending — [install from git tag](https://github.com/voxgig-sdk/church-calendar-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/church-calendar-sdk/go-cli` | `go install github.com/voxgig-sdk/church-calendar-sdk/go-cli/cmd/church-calendar@latest` |
 | Go MCP server | `github.com/voxgig-sdk/church-calendar-sdk/go-mcp` | `go get github.com/voxgig-sdk/church-calendar-sdk/go-mcp@latest` |
 
